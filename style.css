@@ -1,0 +1,414 @@
+
+
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.setup-screens > .screen > .container {
+    padding: 10px;
+}
+
+
+.topbar > .navlink {
+    height: fit-content;
+    margin: auto;
+    margin-left: 15px;  
+}
+
+
+.setup-progress {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 15px;
+    background: linear-gradient(rgb(255, 255, 255) 0%, rgb(241, 241, 241) 50%, rgb(225, 225, 225) 51%, rgb(246, 246, 246) 100%);
+}
+
+.setup-progress > .step, .setup-progress > .arrow {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+}
+
+.setup-progress > .step:hover {
+    background: linear-gradient(rgb(235, 241, 246) 0%, rgb(171, 211, 238) 50%, rgb(137, 195, 235) 51%, rgb(213, 235, 251) 100%);
+    cursor: pointer;
+}
+
+.setup-progress > .step:first-child:hover {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+.setup-progress > .step:last-child:hover {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+
+.setup-progress > .arrow {
+    width: 3% !important;
+    max-height: 19px;
+    font-size: 44px;
+    line-height: 0.45;
+    color: #cacaca;
+}
+
+
+.setup-prog-container {
+    border-radius: 15px;
+}
+
+
+
+.nav-buttons > button {
+    margin-right: 5px;
+}
+
+
+
+.rel-actions {
+    width: 70%;
+}
+
+
+.rel-actions > form {
+    margin: auto;
+    height: 100%;
+}
+
+.rel-actions > form > button {
+    position: relative;
+    top: 35%;
+    float: right;
+    margin-right: 15px;
+}
+
+
+.dl-details {
+    display: flex;
+    background: #f5f5f5;
+    border: 1px solid #aeaeae;
+    box-shadow: 0px 3px 6px #0000002b;
+}
+
+.dl-details > .aside > img {
+    height: 92px;
+}
+
+.dl-details > .text {
+    display: grid;
+    margin-left: 15px;
+}
+
+.dl-details > .text > ul {
+    height: fit-content;
+    margin-top: 5px;
+}
+
+.nav-buttons {
+    margin-top: 20px;
+}
+
+
+.download-status {
+    display: grid;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.download-status > .status {
+    font-weight: bold;
+}
+
+
+.white-noline {
+    color: white;
+    text-decoration: none;
+}
+
+
+.frontpage-search, .center-dialog {
+    margin: 10% auto;
+    margin-bottom: unset;
+    padding: 15px;
+    width: fit-content;
+    height: fit-content;
+}
+
+
+
+.setup-page {
+    background: linear-gradient(#fff,#f9f9f9);
+}
+
+
+.center-dialog {
+    max-width: 50%;
+    background: linear-gradient(#fff,#f9f9f9);
+    border: 1px solid #b3b3b3;
+}
+
+
+.frontpage-genres {
+    margin: auto;
+    margin-top: 50px;
+}
+
+
+
+
+.frontpage-genres > tbody > tr > td > ul > li > .mini {
+    font-size: 12px;
+}
+.frontpage-genres > tbody > tr > td > ul > li > a {
+    color: black;
+}
+
+
+.title-results {
+    color: #424242;
+    display: block;
+    margin: 10px;
+}
+
+
+.genre-title {
+    margin-top: 10px;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #424242;
+}
+
+
+.size8 {
+    font-size: 8px;
+}
+
+
+.btn3 {
+  background: linear-gradient(#757575,#2d2d2d);
+  border: unset;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px black;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 2px solid #444;
+}
+
+
+.btn2 {
+    border: unset;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    background: #8cbd1a;
+    text-shadow: 1px 1px rgb(30, 53, 8);
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+}
+
+
+.btn1 {
+    border: unset;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    background: #494949;
+    text-shadow: 1px 1px black;
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+  
+}
+
+
+
+li {
+    list-style: none;
+}
+
+
+.error::before {
+    content: url('img/ico/err.png');
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+}
+
+.error {
+    color: rgb(145, 0, 0);
+}
+
+
+.rel-quality {
+    font-size: 10px;
+    margin-top: 25px;
+    display: block;
+}
+
+
+#explicit {
+    position: relative;
+    top: 1px;
+    left: 5px;  
+}
+
+
+a {
+    color: black;
+}
+
+
+.tracklist {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tracklist > tbody > tr > th {
+    background: linear-gradient(rgb(48, 48, 48) 0%, rgb(40, 40, 40) 50%, rgb(30, 30, 30) 51%, rgb(47, 47, 47) 100%);
+    color: white;
+}
+
+.tracklist > tbody > tr > td {
+    border: 1px solid gainsboro;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.tracklist > tbody > tr:nth-child(2n+0) {
+    background-color: #f7f7f7;
+}
+
+
+.enlarge-cover {
+    text-align: center;
+}
+.enlarge-cover > a {
+    color: #2749b8;
+    text-decoration: none;
+}
+.enlarge-cover::before {
+    content: url('img/ico/enlarge.png');
+}
+
+
+.size12 {
+    font-size: 12px;
+}
+
+
+.hires {
+    float: left;
+    margin-right: 5px;
+}
+
+
+.rel-channel {
+    font-size: 10px;
+}
+
+
+.release {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #f0f0f0;
+    background: linear-gradient(#f9f9f9,white);
+}
+
+
+.release > ul {
+    margin-left: 10px !important;
+}
+
+
+ul {
+    margin: unset;
+    padding: unset;
+}
+
+
+.artist-name {
+    color: #3b3b3b;
+    font-size: 12px;
+}
+
+.album-title {
+    font-weight: bold;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+
+.album-cover {
+    float: left;
+    max-height: 100px;
+}
+
+
+.topbar {
+    padding: 15px;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    border: 1px solid gainsboro;
+    border-bottom: unset;
+}
+
+.title1 {
+    margin-top: 15px;
+    color: white;
+    background: #3a3a3a;
+}
+.title1 > span {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.page {
+    max-width: 1024px;
+    margin: auto;
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.genre-banners {
+    margin: auto;
+    border: 1px solid #c6c6c6;
+    border-radius: 5px;
+}
+.genre-banners > tbody {
+    display: flex;
+}
+.genre-banners > tbody > tr > td > a > img {
+    max-height: 100px;
+}
+
+
+.topbar {
+    display: flex;
+}
+.topbar > form {
+    height: fit-content;
+    margin: auto;
+}
+
+.topbar > a > img {
+    margin-right: 15px;
+}
+
+
+.logo {
+    margin-bottom: 5px;
+}
+
+
+form {
+    margin: unset;
+}
