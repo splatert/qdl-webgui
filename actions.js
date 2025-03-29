@@ -2,6 +2,41 @@
 
 
 
+function preview(button, audioObject) {
+    
+    var btns = document.getElementsByClassName('preview');
+    for (btn in btns) {
+        btns[btn].src = 'img/misc/preview.png';
+    }
+
+    if (button) {
+        button.src = 'img/misc/prev_play.png';
+    }
+
+    var audios = document.getElementsByClassName('preview-audio');
+    for (let a=0; a<audios.length; a++) {
+        if (audios[a] != audioObject) {
+            audios[a].pause();
+            audios[a].currentTime = 0;
+        }
+    }
+
+
+    if (audioObject) {
+        if (audioObject.paused) {
+            audioObject.play();
+        }
+        else if (!audioObject.paused) {
+            audioObject.pause();
+            if (button) {
+                button.src = 'img/misc/preview.png';
+            }
+        }
+    }
+
+}
+
+
 function loadingDialog(text) {
     var bg = document.createElement('div');
     bg.className = 'load-dialog';

@@ -47,6 +47,7 @@
 
 
                     $rel = $dom->find('.album-item')[0];
+                    $avgCol = '';
 
                     echo '<div class="release">';
                     
@@ -122,7 +123,7 @@
                                     }
 
                                     echo '<input type="hidden" name="url" value="https://www.qobuz.com'.$_GET['url'].'" ></input>';
-                                    echo '<button class="btn3" type="submit" style="padding: 10px;" onclick="loadingDialog(\'Downloading tracks... Please wait.\');">
+                                    echo '<button class="btn1" type="submit" style="padding: 10px;" onclick="loadingDialog(\'Downloading tracks... Please wait.\');">
                                     <div style="display: grid;text-align: left;">
                                         <span>Download Album</span>';
 
@@ -132,7 +133,7 @@
                                     }
                                     echo '</div></button>';
 
-                                    echo '<button style="padding:15px"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on Qobuz</a></button>';
+                                    echo '<button style="padding:14px"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on Qobuz</a></button>';
 
                                 }
                             echo '</form>';
@@ -143,8 +144,8 @@
 
 
                     if (isset($_GET['url'])) {
-                        echo '<div class="size12" style="margin-bottom: 5px;">';
-                            echo '<label for="qdl-cmd">Qobuz-dl command: </label>';
+                        echo '<div class="size12" style="padding-bottom: 5px;background: linear-gradient(#fff,#e6e6e6);padding-left: 10px;">';
+                            echo '<label style="text-shadow: 1px 1px white;" for="qdl-cmd">Qobuz-dl command: </label>';
                             echo '<input class="size12" name="qdl-cmd" onfocus="this.select();" onmouseup="return false;" type="text" value="qobuz-dl dl https://www.qobuz.com'.$_GET['url'].'" ></input>';
                         echo '</div>';
                     }
@@ -153,7 +154,7 @@
                     echo '<table class="tracklist">';
                             $trackItems = $dom->find('.track');
 
-                            echo '<tr><th>Track</th><th>Duration</th><th>View Credits</th></tr>';
+                            echo '<tr><th>Track</th><th>Duration</th><th>Credits</th><th>Preview</th></tr>';
 
                             foreach ($trackItems as $trackItem) {
                                 
@@ -161,16 +162,27 @@
                                 $dur = $trackItem->find('.track__item--duration');
                                 $infos = $trackItem->find('.track__infos .track__info');
 
+
                                 if ($title[0] && $dur[0]) {
                                     echo '<tr>
                                     
-                                        <td>'.$title[0].'</td>
-                                        <td>'.$dur[0].'</td>
+                                        <td>'.$title[0]->plaintext.'</td>
+                                        <td style="width:10%">'.$dur[0]->plaintext.'</td>
                                     ';
 
                                     if ($title[0] && $infos[0]) {
-                                        echo '<td style="text-align:center;width:15%;"><a target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'">Credits</a></td>';
+                                        echo '<td style="text-align:center;width:10%;"><a class="noline" target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'"><b>ⓘ</b></a></td>';
                                     }
+
+                                    $prev_audio = $trackItem->getAttribute('data-source');
+                                    echo '<td style="width:10%">';
+                                        if (isset($prev_audio)) {
+                                            echo '<div style="text-align: center;">';
+                                                echo '<img class="preview" onclick="preview(this, this.parentNode.lastChild)" src="img/misc/preview.png">';
+                                                echo '<audio class="preview-audio"><source src="'.$prev_audio.'" type="audio/mpeg"></audio>';
+                                            echo '</div>';
+                                        }
+                                    echo '</td>';
 
                                     echo '</tr>';
                                 }

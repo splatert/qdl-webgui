@@ -121,9 +121,12 @@ html {
     font-weight: bold;
 }
 
-
 .white-noline {
     color: white;
+    text-decoration: none;
+}
+
+.noline {
     text-decoration: none;
 }
 
@@ -266,8 +269,9 @@ a {
     width: 100%;
 }
 
-.tracklist > tbody > tr > th {
-    background: linear-gradient(rgb(48, 48, 48) 0%, rgb(40, 40, 40) 50%, rgb(30, 30, 30) 51%, rgb(47, 47, 47) 100%);
+.tracklist > tbody > tr:nth-child(1) {
+    background-color: #2d2d2d;
+    text-shadow: 1px 1px black;
     color: white;
 }
 
@@ -350,8 +354,8 @@ ul {
 
 
 .topbar {
-    padding: 15px;
-    width: fit-content;
+    padding: 5px;
+    max-width: 1024px;
     height: fit-content;
     margin: auto;
     border: 1px solid gainsboro;
@@ -391,15 +395,17 @@ ul {
 }
 
 
-.topbar {
+.topbar > div {
     display: flex;
+    width: fit-content;
+    margin: auto;
 }
-.topbar > form {
+.topbar > div > form {
     height: fit-content;
     margin: auto;
 }
 
-.topbar > a > img {
+.topbar > div > a > img {
     margin-right: 15px;
 }
 
