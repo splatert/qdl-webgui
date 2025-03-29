@@ -19,6 +19,14 @@ QDL-WebGUI is an experimental and incomplete UI frontend for qobuz-dl. It is wri
 (You can get simplehtmldom from the following link: https://sourceforge.net/projects/simplehtmldom/)
 
 
+## To-do list
+1. Song previews - Not Done
+2. Label pages - Not Done
+3. Settings page to edit config.ini - Partially Done
+4. Convert links for featured album/discography banners to work with this frontend - Partially Done
+
+
+
 ## Screenshots
 <img src="https://github.com/user-attachments/assets/0858a022-9f11-47c8-b6e6-7fcb3274cc8c">
 <img src="https://github.com/user-attachments/assets/6cdbfef5-672b-4f36-b388-8ae1b461fb16">
