@@ -72,13 +72,28 @@
                         }
 
 
-
+                        $user = exec('whoami');
+                        $app = "/home" ."/". $user . "/.local/pipx/venvs/qobuz-dl/bin/python /home/".$user."/.local/pipx/venvs/qobuz-dl/bin/qobuz-dl";
                         $mode = 'dl';
 
                         if (isset($_GET['mode'])) {
+                            
                             if ($_GET['mode'] == 'lucky') {
                                 $mode = 'lucky';
                             }
+
+                            if ($_GET['mode'] == 'purge') {
+
+                                putenv('HOME=/home/'.$user);
+
+                                exec($app . ' -p 2>&1', $out);
+                                echo 'Database has been purged.';
+
+                                echo '<script> setTimeout(() => {history.back()}, 2000);</script>';
+                                die();
+
+                            }
+
                         }
 
 
@@ -125,7 +140,6 @@
                                 chdir(trim($dlPath[1]));
                             }
 
-                            $app = "/home" ."/". $user . "/.local/pipx/venvs/qobuz-dl/bin/python /home/".$user."/.local/pipx/venvs/qobuz-dl/bin/qobuz-dl";
                             $cmd .= ' 2>&1 | tee ' .$logfile;
                             exec($app. ' ' .$cmd, $output);
 
@@ -149,7 +163,7 @@
                             $error_type = 'not_premium';
                         }
 
-                        removeStatusLogFile($logfile);
+                        //removeStatusLogFile($logfile);
                         
                         echo '<title>'.$lastline.' | QobuzDL</title>';
                         echo $lastline;
