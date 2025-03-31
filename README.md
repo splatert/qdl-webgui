@@ -31,5 +31,5 @@ QDL-WebGUI is an experimental and incomplete UI frontend for qobuz-dl. It is wri
 ## Screenshots
 <img src="https://github.com/user-attachments/assets/0858a022-9f11-47c8-b6e6-7fcb3274cc8c">
 <img src="https://github.com/user-attachments/assets/6cdbfef5-672b-4f36-b388-8ae1b461fb16">
-<img src="https://github.com/user-attachments/assets/60fb300e-37de-429b-8f40-97a66c1e6402">
+<img src="https://github.com/user-attachments/assets/128b8934-38ad-4cba-a745-21118463600d">
 <img src="https://github.com/user-attachments/assets/b9c6ac8c-d0bd-4139-80cc-2ab82772a577">
