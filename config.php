@@ -142,8 +142,8 @@
                             <main>
                                 <h3>Downloads Folder</h3>
                                     <p>Please enter a path to where you want to keep your downloads.
-                                    <br><br>They can be relative to your home directory.
-                                    <br><i>For example: Downloads/qobuzdl</i>
+                                    <br><br>It must be an absolute path.
+                                    <br><i>For example: /home/tux/Downloads/qobuzdl</i>
                                 </p>
 
                                 <form method="GET" action="config.php">

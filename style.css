@@ -85,6 +85,16 @@ html {
 }
 
 
+
+.dl-status {
+    margin-top: 15px;
+    color: #5f5f5f;
+    max-height: 75px;
+    overflow-y: scroll;
+}
+
+
+
 .dl-details {
     display: flex;
     background: #f5f5f5;
@@ -120,6 +130,22 @@ html {
 .download-status > .status {
     font-weight: bold;
 }
+
+
+
+.search-dl-btn {
+    display: block;
+    margin: 15%;
+    float: right;
+  
+}
+
+
+
+.nobg {
+    background: unset !important;
+}
+
 
 .white-noline {
     color: white;
@@ -323,8 +349,17 @@ a {
     background: linear-gradient(#f9f9f9,white);
 }
 
+.release2 {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #f0f0f0;
+    background: linear-gradient(#f9f9f9,white);
+}
 
-.release > ul {
+
+.release > ul, .release2 > div > ul {
     margin-left: 10px !important;
 }
 
@@ -358,11 +393,13 @@ ul {
     max-width: 1024px;
     height: fit-content;
     margin: auto;
+    background: linear-gradient(180deg, #fff,#e6e6e6);
     border: 1px solid gainsboro;
     border-bottom: unset;
 }
 
 .title1 {
+    padding: 5px;
     margin-top: 15px;
     color: white;
     background: #3a3a3a;
@@ -378,7 +415,6 @@ ul {
     max-width: 1024px;
     margin: auto;
     border: 1px solid #c6c6c6;
-    border-radius: 5px;
     padding: 5px;
 }
 

@@ -16,7 +16,7 @@
 
 
     <body>
-        <script src="actions.js"></script>
+        <script src="actions.js?v=2"></script>
         <div class="center-dialog">
 
             <div class="dl-details">
@@ -46,9 +46,32 @@
                     <?php
                         
                         $success = false;
-                        $dlPath = __DIR__.'/';
                         $lastline = '';
                         $error_type = 'no_error';
+
+
+
+                        function removeStatusLogFile($path) {
+                            unlink($path);
+                        }
+
+
+                        function createStatusLogFile($dir, $title) {
+
+                            // fix directory
+                            $dir = trim($dir);
+                            // filter out illegal characters
+                            $title = preg_replace("/[^A-Za-z0-9]/", '', $title);
+
+                            chdir($dir);
+                            fopen($title . '.log', 'w');
+
+                            $fullpath = $dir .'/'. $title . '.log';
+                            return $fullpath;
+
+                        }
+
+
 
                         $mode = 'dl';
 
@@ -60,6 +83,13 @@
 
 
                         if (isset($_GET['url']) || isset($_GET['q'])) {
+
+                            if (isset($_GET['url']) && $_GET['url'] == '') {
+                                die('URL required.');
+                            }
+                            if (isset($_GET['q']) && $_GET['q'] == '') {
+                                die('Please provide a query.');
+                            }
 
                             // download, lucky
                             if ($mode == 'dl') {
@@ -80,20 +110,24 @@
                             }
 
                             $user = exec('whoami');
-                            // $cfg_path = "/home/".$user.'/.config/qobuz-dl/config.ini';
-                            // $config = file($cfg_path, FILE_SKIP_EMPTY_LINES);
-
-                            // $dlPath = explode('default_folder = ', $config[3]);
-
-                            // if (isset($dlPath[1]) && $dlPath[1] != '') {
-                            //     chdir($dlPath[1]);
-                            //     die('Current: '.getcwd() . '<br>Expected: ' . $dlPath[1]);
-                            // }
+                            $cfg_path = "/home/".$user.'/.config/qobuz-dl/config.ini';
+                            $config = file($cfg_path, FILE_SKIP_EMPTY_LINES);
+                            $dlPath = explode('default_folder = ', $config[3]);
+                            
+                            $logfile = '';
 
                             putenv('HOME=/home/'.$user);
-                            $app = "/home" ."/". $user . "/.local/pipx/venvs/qobuz-dl/bin/python /home/".$user."/.local/pipx/venvs/qobuz-dl/bin/qobuz-dl";
 
-                            exec($app. ' ' .$cmd." 2>&1", $output, $return_var);
+                            if (isset($dlPath[1]) && $dlPath[1] != '') {
+                                if (isset($_GET['artist']) && isset($_GET['title'])) {
+                                    $logfile = createStatusLogFile($dlPath[1], trim($_GET['artist'].' - '. $_GET['title']));
+                                }
+                                chdir(trim($dlPath[1]));
+                            }
+
+                            $app = "/home" ."/". $user . "/.local/pipx/venvs/qobuz-dl/bin/python /home/".$user."/.local/pipx/venvs/qobuz-dl/bin/qobuz-dl";
+                            $cmd .= ' 2>&1 | tee ' .$logfile;
+                            exec($app. ' ' .$cmd, $output);
 
                             $lastline = $output[count($output) - 1];
                         }
@@ -115,6 +149,7 @@
                             $error_type = 'not_premium';
                         }
 
+                        removeStatusLogFile($logfile);
                         
                         echo '<title>'.$lastline.' | QobuzDL</title>';
                         echo $lastline;
@@ -159,10 +194,15 @@
                             }
 
                             if (isset($_GET['artist']) && isset($_GET['title'])) {
+
+                                $both = trim($_GET['artist']) .' - '. trim($_GET['title']);
+                                $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
+                                echo '<script> function dlstatus() { getDLStatus("' .$both.'") } </script>';
+
                                 echo '<input type="hidden" name="nodb" value="1">';
                                 echo '<input type="hidden" name="artist" value="'.$_GET['artist'].'">';
                                 echo '<input type="hidden" name="title" value="'.$_GET['title'].'">';
-                                echo '<button class="btn2" style="margin-left:5px;" type="submit" onclick="loadingDialog(\'Downloading tracks... Please wait.\');">Download anyway</button>';
+                                echo '<button class="btn2" style="margin-left:5px;" type="submit" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); dlstatus();">Download anyway</button>';
                             }
                         echo '</form>';
                     }

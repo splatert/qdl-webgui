@@ -45,6 +45,12 @@
                     $dom->load($response);
 
 
+                    $err404 = $dom->find('.container-404');
+                    if (isset($err404[0])) {
+                        echo '<script>removeLoadingDialog();</script>';
+                        die('<b class="error">Error 404</b> - Qobuz resource no longer exists.');
+                    }
+
 
                     $rel = $dom->find('.album-item')[0];
                     $avgCol = '';
@@ -72,7 +78,7 @@
 
                                 $explicit = $rel->find('.ExplicitIcon');
                                 if (isset($explicit[0])) {
-                                    echo '<img id="explicit" src="img/explicit.png">';
+                                    echo '<img title="Explicit" id="explicit" src="img/explicit.png">';
                                 }
 
                                 echo '</li>';
@@ -122,8 +128,16 @@
                                         echo '<input type="hidden" name="img" value="'.trim($art[0]->src).'">';
                                     }
 
+                                    if (isset($artist[0]) && $title[0]) {
+
+                                        $both = trim($artist[0]->plaintext) .' - '. trim($title[0]->plaintext);
+                                        $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
+
+                                        echo '<script> function dlstatus() { getDLStatus("' .$both.'") } </script>';
+                                    }
+
                                     echo '<input type="hidden" name="url" value="https://www.qobuz.com'.$_GET['url'].'" ></input>';
-                                    echo '<button class="btn1" type="submit" style="padding: 10px;" onclick="loadingDialog(\'Downloading tracks... Please wait.\');">
+                                    echo '<button class="btn1" type="submit" style="padding: 10px;" onclick="dlstatus(); loadingDialog(\'Downloading tracks... Please wait.\');">
                                     <div style="display: grid;text-align: left;">
                                         <span>Download Album</span>';
 
@@ -153,8 +167,9 @@
 
                     echo '<table class="tracklist">';
                             $trackItems = $dom->find('.track');
+                            $tracknum = 0;
 
-                            echo '<tr><th>Track</th><th>Duration</th><th>Credits</th><th>Preview</th></tr>';
+                            echo '<tr><th>#</th><th>Track</th><th>Duration</th><th>Credits</th><th>Preview</th></tr>';
 
                             foreach ($trackItems as $trackItem) {
                                 
@@ -162,16 +177,22 @@
                                 $dur = $trackItem->find('.track__item--duration');
                                 $infos = $trackItem->find('.track__infos .track__info');
 
-
                                 if ($title[0] && $dur[0]) {
+
+                                    $tracknum += 1;
+
                                     echo '<tr>
+                                        <td>'.$tracknum.'</td>
                                     
                                         <td>'.$title[0]->plaintext.'</td>
                                         <td style="width:10%">'.$dur[0]->plaintext.'</td>
                                     ';
 
-                                    if ($title[0] && $infos[0]) {
+                                    if (isset($title[0]) && isset($infos[0])) {
                                         echo '<td style="text-align:center;width:10%;"><a class="noline" target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'"><b>ⓘ</b></a></td>';
+                                    }
+                                    else {
+                                        echo '<td><center>N/A</center></td>';
                                     }
 
                                     $prev_audio = $trackItem->getAttribute('data-source');

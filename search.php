@@ -148,26 +148,52 @@
 
                         $rels = $rows[$row]->find('.album-container');
                         foreach ($rels as $rel) {
-                            echo '<div class="release">';
+                            echo '<div class="release2">';
 
                                 $art = $rel->find('.album-cover img');
-                                if (isset($art[0])) {
-                                    $mini_cover = str_replace('_600', '_100', $art[0]->src);
-                                    echo '<img class="album-cover" src="'.$mini_cover.'">';
-                                }
-
-                                echo '<ul>';
-                                    $artist = $rel->find('.artist-name');
-                                    $title = $rel->find('.album-title');
-
-                                    if ($artist[0] && $title[0]) {
-
-                                        $releaseURL = 'release.php?url='.urlencode($title[0]->href);
-
-                                        echo '<li class="artist-name">'.trim($artist[0]->plaintext).'</li>';
-                                        echo '<li class="album-title"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
+                                
+                                echo '<div style="width:75%">';
+                                    if (isset($art[0])) {
+                                        $mini_cover = str_replace('_600', '_100', $art[0]->src);
+                                        echo '<img class="album-cover" src="'.$mini_cover.'">';
                                     }
-                                echo '</ul>';
+
+                                    echo '<div><ul>';
+                                        $artist = $rel->find('.artist-name');
+                                        $title = $rel->find('.album-title');
+
+                                        if ($artist[0] && $title[0]) {   
+                                            $releaseURL = 'release.php?url='.urlencode($title[0]->href);
+
+                                            echo '<li class="artist-name">'.trim($artist[0]->plaintext).'</li>';
+                                            echo '<li class="album-title"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
+                                        }
+                                    echo '</ul></div>';
+                                echo '</div>';
+
+                                echo '<div style="width:25%">
+                                    <form method="GET" action="download.php">';
+                                    
+                                        if (isset($artist[0]) && $title[0]) {
+                                            $both = trim($artist[0]->plaintext) .' - '. trim($title[0]->plaintext);
+                                            $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
+
+                                            echo '<button style="margin:unset !important;" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); getDLStatus(\''.$both.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
+
+                                        }
+
+                                        if (isset($artist[0])) {
+                                            echo '<input type="hidden" name="artist" value="'.trim($artist[0]->plaintext).'">';
+                                        }
+                                        if (isset($title[0])) {
+                                            echo '<input type="hidden" name="url" value="https://www.qobuz.com'.$title[0]->href.'">';
+                                            echo '<input type="hidden" name="title" value="'.trim($title[0]->plaintext).'">';
+                                        }
+                                        if (isset($art[0])) {
+                                            echo '<input type="hidden" name="img" value="'.$art[0]->src.'">';
+                                        }
+                                echo '</form>
+                                </div>';
 
                             echo '</div>';
 
@@ -216,7 +242,7 @@
                             echo '<img class="album-cover" src="'.$mini_cover.'">';
                         }
 
-                        echo '<ul style="width: 100%;">';
+                        echo '<ul style="width: 75%;">';
                             $artist = $rel->find('.ReleaseCardInfosSubtitle');
                             $title = $rel->find('.ReleaseCardInfosTitle');
 
@@ -263,6 +289,31 @@
                             }
 
                         echo '</ul>';
+
+                        echo '<div style="width:25%">
+                            <form method="GET" action="download.php">';
+                        
+                                if (isset($artist[1]) && isset($title[0])) {
+                                    $both = trim($artist[1]->plaintext) .' - '. trim($title[0]->plaintext);
+                                    $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
+
+                                    echo '<button style="margin:unset !important;" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); getDLStatus(\''.$both.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
+                                }
+
+                                if (isset($artist[1])) {
+                                    echo '<input type="hidden" name="artist" value="'.trim($artist[1]->plaintext).'">';
+                                }
+                                if (isset($title[0])) {
+                                    echo '<input type="hidden" name="url" value="https://www.qobuz.com'.$title[0]->href.'">';
+                                    echo '<input type="hidden" name="title" value="'.trim($title[0]->plaintext).'">';
+                                }
+                                if (isset($art[0])) {
+                                    echo '<input type="hidden" name="img" value="'.$art[0]->src.'">';
+                                }
+
+                        echo '</form>
+                        </div>';
+
 
                     echo '</div>';
                 }

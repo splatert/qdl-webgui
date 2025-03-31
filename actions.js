@@ -37,7 +37,36 @@ function preview(button, audioObject) {
 }
 
 
+
+
+async function getDLStatus(relTitle) {
+    
+    relTitle = relTitle.replace('/&(amp;)+/', '');
+    relTitle = relTitle.replace('/[^A-Za-z0-9]/', '');
+
+    setInterval(() => {
+
+        fetch('status.php?rel=' + relTitle)
+        .then(status => status.text())
+        .then (status => {
+            document.getElementsByClassName('dl-status')[0].innerHTML = status
+        })
+
+    }, 1000);
+
+}
+
+
+
+
+
 function loadingDialog(text) {
+
+    var existing = document.getElementsByClassName('load-dialog');
+    if (existing[0]) {
+        existing[0].remove();
+    }
+
     var bg = document.createElement('div');
     bg.className = 'load-dialog';
 
@@ -51,9 +80,14 @@ function loadingDialog(text) {
     bg.style.backgroundColor = '#000000bf';
 
     bg.innerHTML = `
-        <div style="background:white;margin: 15% auto;width:fit-content;display:flex;padding:5px;">
-            <img src="img/ico/load.gif">
-            <span class="loading-status" style="line-height:2;margin-left:15px;">`+text+`</span>
+        <div style="background:white;margin: 15% auto;width:fit-content;padding:5px;">
+            <div style="display:flex;">
+                <img src="img/ico/load.gif">
+                <span class="loading-status" style="line-height:2;margin-left:15px;">`+text+`</span>
+            </div>
+            <div class="dl-status">
+                <span></span>
+            </div>
         </div>
     `;
 
