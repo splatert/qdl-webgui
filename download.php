@@ -163,7 +163,7 @@
                             $error_type = 'not_premium';
                         }
 
-                        //removeStatusLogFile($logfile);
+                        removeStatusLogFile($logfile);
                         
                         echo '<title>'.$lastline.' | QobuzDL</title>';
                         echo $lastline;
