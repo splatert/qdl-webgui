@@ -139,7 +139,7 @@
 
                 <div class="screen" id="screen1"> <div class="container">
                     <div class="top" style="display:flex;">
-                            <main>
+                            <main style="width: 100%;">
                                 <h3>Downloads Folder</h3>
                                     <p>Please enter a path to where you want to keep your downloads.
                                     <br><br>It must be an absolute path.
@@ -150,6 +150,12 @@
                                     <input type="text" name="dl-path">
                                     <input type="hidden" name="step" value="1">
                                     <button type="submit">Save</button>
+                                </form>
+
+
+                                <form method="GET" action="download.php">
+                                    <input type="hidden" name="mode" value="purge">
+                                    <button class="btn4" type="submit" style="float:right;">Purge Database</button>
                                 </form>
 
                             </main>

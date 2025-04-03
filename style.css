@@ -135,9 +135,8 @@ html {
 
 .search-dl-btn {
     display: block;
-    margin: 15%;
     float: right;
-  
+    height: 100%;
 }
 
 
@@ -179,11 +178,43 @@ html {
 }
 
 
-.frontpage-genres {
-    margin: auto;
-    margin-top: 50px;
+.label > td {
+    padding: 5px;
 }
 
+
+.labels {
+    border-collapse: collapse;
+}
+
+tbody > .label > td > span > a {
+    text-decoration: none;
+}
+
+.label-details {
+    display: flex;
+    margin-top: 5px;
+}
+.label-details > main {
+    height: fit-content;
+    padding-top: 5px;  
+}
+.label-details > aside {
+    margin-right: 10px;
+}
+
+
+.frontpage-genres {
+    margin: auto;
+    margin-top: 25px;
+    border: 1px solid #494949;
+    padding: 5px;
+}
+
+
+tbody > .label:nth-child(2n) {
+    background-color: #fafafa;
+}
 
 
 
@@ -246,6 +277,19 @@ html {
     padding: 5px;
     font-weight: bold;
     background: #494949;
+    text-shadow: 1px 1px black;
+    border-radius: 5px;
+    box-shadow: 1px 1px black;
+  
+}
+
+
+.btn4 {
+    border: unset;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    background: #bd1a1a;
     text-shadow: 1px 1px black;
     border-radius: 5px;
     box-shadow: 1px 1px black;

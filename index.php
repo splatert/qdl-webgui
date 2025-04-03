@@ -18,8 +18,14 @@
 
             <form method="GET" action="search.php">
                 <input type="text" name="q">
-                <input type="submit" class="btn1" name="type" value="search" onclick="loadingDialog('')">
+                <button type="submit" class="btn1" onclick="loadingDialog('')">Search</button>
                 <input type="submit" class="btn2" name="type" value="lucky">
+                    <br>
+                <input type="radio" checked="checked" name="type" value="search">
+                <label for="type">Albums</label>
+                <input type="radio" name="type" value="labels">
+                <label for="type">Labels</label>
+
             </form>
         </div>
 

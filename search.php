@@ -9,6 +9,13 @@
     require_once('topbar.php');
 
 
+    if (isset($_GET['q']) && isset($_GET['type'])) {
+        if ($_GET['type'] == 'labels') {
+            header('Location: labels.php?q='.$_GET['q']);
+        }
+    }
+
+
 
     $genres = array(
         'all' => 'All Genres',
@@ -44,7 +51,6 @@
         <div class="page">
 
             <?php
-
 
             if (isset($_GET['type'])) {
                 if ($_GET['type'] == 'lucky') {
@@ -148,6 +154,15 @@
 
                         $rels = $rows[$row]->find('.album-container');
                         foreach ($rels as $rel) {
+
+                            $artist = $rel->find('.artist-name');
+                            $title = $rel->find('.album-title');
+                            $releaseURL = '';
+
+                            if (isset($title[0])) {
+                                $releaseURL = 'release.php?url='.urlencode($title[0]->href);
+                            }
+
                             echo '<div class="release2">';
 
                                 $art = $rel->find('.album-cover img');
@@ -159,12 +174,7 @@
                                     }
 
                                     echo '<div><ul>';
-                                        $artist = $rel->find('.artist-name');
-                                        $title = $rel->find('.album-title');
-
                                         if ($artist[0] && $title[0]) {   
-                                            $releaseURL = 'release.php?url='.urlencode($title[0]->href);
-
                                             echo '<li class="artist-name">'.trim($artist[0]->plaintext).'</li>';
                                             echo '<li class="album-title"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
                                         }
@@ -237,19 +247,22 @@
                     echo '<div class="release">';
 
                         $art = $rel->find('.CoverModel');
-                        if (isset($art[0])) {
+                        $title = $rel->find('.ReleaseCardInfosTitle');
+                        $releaseURL = '';
+
+                        if (isset($title[0])) {
+                            $releaseURL = 'release.php?url='.urlencode($title[0]->href);
+                        }
+
+                        if (isset($art[0]) && isset($title[0])) {
                             $mini_cover = str_replace('_230', '_100', $art[0]->src);
-                            echo '<img class="album-cover" src="'.$mini_cover.'">';
+                            echo '<a href="'.$releaseURL.'"><img class="album-cover" src="'.$mini_cover.'"></a>';
                         }
 
                         echo '<ul style="width: 75%;">';
                             $artist = $rel->find('.ReleaseCardInfosSubtitle');
-                            $title = $rel->find('.ReleaseCardInfosTitle');
 
                             if ($artist[1] && $title[0]) {
-
-                                $releaseURL = 'release.php?url='.urlencode($title[0]->href);
-
                                 echo '<li class="artist-name">'.$artist[1]->plaintext.'</li>';
                                 echo '<li class="album-title"><a href="'.$releaseURL.'">'.$title[0]->plaintext.'</a></li>';
                             }
@@ -291,7 +304,7 @@
                         echo '</ul>';
 
                         echo '<div style="width:25%">
-                            <form method="GET" action="download.php">';
+                            <form method="GET" action="download.php" style="height: 100%;">';
                         
                                 if (isset($artist[1]) && isset($title[0])) {
                                     $both = trim($artist[1]->plaintext) .' - '. trim($title[0]->plaintext);
