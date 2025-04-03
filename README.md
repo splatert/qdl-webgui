@@ -27,9 +27,8 @@ QDL-WebGUI is an experimental and incomplete UI frontend for qobuz-dl. It is wri
 5. Convert links for featured album/discography banners to work with this frontend - Partially Done
 
 
-
 ## Screenshots
-<img src="https://github.com/user-attachments/assets/0858a022-9f11-47c8-b6e6-7fcb3274cc8c">
+<img src="https://github.com/user-attachments/assets/e0eab749-11f4-4ebc-b30f-cd057b784432">
 <img src="https://github.com/user-attachments/assets/6cdbfef5-672b-4f36-b388-8ae1b461fb16">
 <img src="https://github.com/user-attachments/assets/128b8934-38ad-4cba-a745-21118463600d">
 <img src="https://github.com/user-attachments/assets/b9c6ac8c-d0bd-4139-80cc-2ab82772a577">
