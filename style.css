@@ -191,6 +191,25 @@ tbody > .label > td > span > a {
     text-decoration: none;
 }
 
+
+.results-header {
+    display: flex;
+    background: #f9f9f9;
+    border: 1px solid gainsboro;
+}
+
+
+.arrow-rt-submit {
+    background-image: url('img/ico/arrow-rt.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding: 8px;
+    border: unset;
+    position: relative;
+    bottom: 5px;
+    background-color: unset;
+}
+
 .label-details {
     display: flex;
     margin-top: 5px;
@@ -209,6 +228,7 @@ tbody > .label > td > span > a {
     margin-top: 25px;
     border: 1px solid #494949;
     padding: 5px;
+    box-shadow: 4px 4px #cacaca;
 }
 
 
@@ -429,6 +449,7 @@ ul {
 .album-cover {
     float: left;
     max-height: 100px;
+    box-shadow: 2px 2px #7d7d7d;
 }
 
 

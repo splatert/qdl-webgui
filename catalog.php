@@ -32,6 +32,18 @@
                         $reqURL = $reqURL . '/' . 'page/' . $_GET['page'];
                     }
 
+                    // sort albums by x,y,z,etc.
+                    if (isset($_GET['sort-by']) && $_GET['sort-by'] != 'default') {
+                        if ($_GET['sort-by'] == 'acclaimed') {
+                            $reqURL .= '?ssf[sortBy]=main_catalog_awards';
+                        }
+                        elseif ($_GET['sort-by'] == 'lowhi') {
+                            $reqURL .= '?ssf[sortBy]=main_catalog_price_asc';
+                        }
+                        elseif ($_GET['sort-by'] == 'newold') {
+                            $reqURL .= '?ssf[sortBy]=main_catalog_date_desc';
+                        }
+                    }
 
                     $ch = curl_init();
                         curl_setopt($ch, CURLOPT_URL, $reqURL);
@@ -62,7 +74,23 @@
                             }
                         }
 
+                        echo '
+                        <li>
+                        <form method="GET" action="catalog.php" style="width: fit-content;float: right;">
+                            <input type="hidden" name="url" value="'.$_GET['url'].'">
+                            <select name="sort-by">
+                                <option value="default">Sort by</option>
+                                <option value="acclaimed">Highly Acclaimed</option>
+                                <option value="lowhi">Price - Low to high</option>
+                                <option value="newold">Newest to oldest</option>
+                            </select>
+                            <button class="arrow-rt-submit" type="submit"></button>
+                        </form>
+                        </li>';
+
                     echo '</ul></main></div>
+
+
                     <hr size="1" color="#c6c6c6">';
 
 

@@ -131,6 +131,8 @@
                     echo '</div>';
                 }
 
+
+
                 if (isset($genres[$_GET['genre']])) {
                     echo '<span class="genre-title">'.$genres[$_GET['genre']] .' releases</span>';
                 }
@@ -167,13 +169,14 @@
 
                                 $art = $rel->find('.album-cover img');
                                 
-                                echo '<div style="width:75%">';
+                                echo '<div style="width:75%;display: flex;">';
                                     if (isset($art[0])) {
                                         $mini_cover = str_replace('_600', '_100', $art[0]->src);
                                         echo '<img class="album-cover" src="'.$mini_cover.'">';
                                     }
 
-                                    echo '<div><ul>';
+                                    echo '<div style="padding-left: 10px;padding-top: 5px;">
+                                    <ul>';
                                         if ($artist[0] && $title[0]) {   
                                             echo '<li class="artist-name">'.trim($artist[0]->plaintext).'</li>';
                                             echo '<li class="album-title"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
@@ -221,13 +224,52 @@
                 
 
                 echo '<title>'.trim($_GET['q']).' | Qobuz-DL</title>';
-                echo '<span class="title-results">Results for <b>"'.$_GET['q'].'"</b></span>';
+                echo '
+                <div class="results-header" style="display: flex;">
+                    <div class="lf" style="width: 100%;">
+                        <span class="title-results">Results for <b>"'.$_GET['q'].'"</b></span>
+                    </div>
+                    <div class="rt" style="width: 100%; float: right;">
+                        <form method="GET" action="search.php" style="margin: 10px;width: fit-content;float: right;">
+                            <input type="hidden" name="type" value="search">
+                            
+                            <select name="type" style="padding: unset;margin-right: 15px;">
+                                <option value="search">Albums</option>
+                                <option value="labels">Labels</option>
+                            </select>
+
+                            <input type="hidden" name="q" value="'.$_GET['q'].'">
+                            <select name="sort-by">
+                                <option value="default">Sort by</option>
+                                <option value="acclaimed">Highly Acclaimed</option>
+                                <option value="lowhi">Price - Low to high</option>
+                                <option value="newold">Newest to oldest</option>
+                            </select>
+                            <button class="arrow-rt-submit" type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+                ';
 
                 $ch = curl_init();
                 $reqURL = 'https://www.qobuz.com/us-en/search/albums/'. $_GET['q'];
 
+                // page number
                 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
                     $reqURL = $reqURL . '/' . 'page/' . $_GET['page'];
+                }
+
+                // sort albums by x,y,z,etc.
+                if (isset($_GET['sort-by']) && $_GET['sort-by'] != 'default') {
+                    if ($_GET['sort-by'] == 'acclaimed') {
+                        $reqURL .= '?ssf[s]=main_catalog_awards';
+                    }
+                    elseif ($_GET['sort-by'] == 'lowhi') {
+                        $reqURL .= '?ssf[s]=main_catalog_price_asc';
+                    }
+                    elseif ($_GET['sort-by'] == 'newold') {
+                        $reqURL .= '?ssf[s]=main_catalog_date_desc';
+                    }
                 }
 
                 curl_setopt($ch, CURLOPT_URL, $reqURL);
