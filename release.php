@@ -133,7 +133,12 @@
                                         $both = trim($artist[0]->plaintext) .' - '. trim($title[0]->plaintext);
                                         $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
 
-                                        echo '<script> function dlstatus() { getDLStatus("' .$both.'") } </script>';
+                                        $art_src = '';
+                                        if (isset($art[0])) {
+                                            $art_src = trim($art[0]->src);
+                                        }
+
+                                        echo '<script> function dlstatus() { getDLStatus("' .$both.'", "'.$art_src.'") } </script>';
                                     }
 
                                     echo '<input type="hidden" name="url" value="https://www.qobuz.com'.$_GET['url'].'" ></input>';

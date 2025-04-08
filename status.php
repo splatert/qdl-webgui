@@ -3,6 +3,7 @@
 
 
 <?php
+
     function getStatusMessage($relTitle) {
 
         $user = exec('whoami');
@@ -30,7 +31,15 @@
 
                     $lastline = $file[count($file)-1];
                     if (isset($lastline)) {
-                        echo strip_tags($lastline);
+                        $str = strip_tags($lastline);
+
+                        $reg = '/(\d*\.?\dM)|( \/\/\/ )|(\d*\.?\d*.tmp)/m';
+                        preg_match_all($reg, $str, $out);
+
+                        if (isset($out)) {
+                            echo json_encode($out);
+                        }
+                        
                     }
                     else {
                         echo '';

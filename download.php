@@ -16,7 +16,7 @@
 
 
     <body>
-        <script src="actions.js?v=2"></script>
+        <script src="actions.js?v=3"></script>
         <div class="center-dialog">
 
             <div class="dl-details">
@@ -85,13 +85,21 @@
                             if ($_GET['mode'] == 'purge') {
 
                                 putenv('HOME=/home/'.$user);
-
                                 exec($app . ' -p 2>&1', $out);
-                                echo 'Database has been purged.';
 
+                                echo 'Database has been purged.';
                                 echo '<script> setTimeout(() => {history.back()}, 2000);</script>';
                                 die();
+                            }
+                            elseif ($_GET['mode'] == 'abort-dl') {
+                                putenv('HOME=/home/'.$user);
+                                exec('killall qobuz-dl', $out);
 
+                                echo 'Download aborted.';
+                                if (isset($_GET['return'])) {
+                                    echo '<script> setTimeout(() => { window.location.href = "'.$_GET['return'].'" }, 2000);</script>';
+                                }
+                                die();
                             }
 
                         }
@@ -163,7 +171,7 @@
                             $error_type = 'not_premium';
                         }
 
-                        removeStatusLogFile($logfile);
+                        // removeStatusLogFile($logfile);
                         
                         echo '<title>'.$lastline.' | QobuzDL</title>';
                         echo $lastline;
@@ -211,7 +219,13 @@
 
                                 $both = trim($_GET['artist']) .' - '. trim($_GET['title']);
                                 $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
-                                echo '<script> function dlstatus() { getDLStatus("' .$both.'") } </script>';
+                                
+                                $art_src = '';
+                                if (isset($_GET['img'])) {
+                                    $art_src = trim($_GET['img']);
+                                }
+
+                                echo '<script> function dlstatus() { getDLStatus("' .$both.'", "'.$art_src.'") } </script>';
 
                                 echo '<input type="hidden" name="nodb" value="1">';
                                 echo '<input type="hidden" name="artist" value="'.$_GET['artist'].'">';

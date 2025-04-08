@@ -85,12 +85,45 @@ html {
 }
 
 
+.dl-status > .top > .abort-dl {
+    background-color: unset;
+    border: 1px solid rgb(145, 0, 0);
+    color: rgb(145, 0, 0);
+    margin-left: 15px;
+    border-radius: 5px;
+}
+
+.dl-status > .top > .abort-dl:hover {
+    color: white;
+    background-color: rgb(145, 0, 0);
+}
+
+
 
 .dl-status {
-    margin-top: 15px;
+    margin: auto;
+    padding: 15px;
     color: #5f5f5f;
     max-height: 75px;
-    overflow-y: scroll;
+}
+
+.dl-status > .top > .status {
+    font-size: 14px;
+}
+
+.dl-status > .top > .status-large {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dl-status > .bottom > .prog {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+.dl-status > .bottom {
+    margin-top: 15px;
 }
 
 
@@ -118,6 +151,11 @@ html {
 
 .nav-buttons {
     margin-top: 20px;
+}
+
+
+.loading-dialog {
+    display:flex;
 }
 
 
@@ -432,6 +470,27 @@ ul {
     margin: unset;
     padding: unset;
 }
+
+
+
+.prog-bar, .prog-bar > .bar {
+    border-radius: 5px;
+}
+
+
+.prog-bar {
+    height: 7px;
+    border: 1px solid;
+    width: 100%;
+    margin: auto;
+}
+
+.prog-bar > .bar {
+    background: linear-gradient(#adee4f,#79bd17);
+    height: 100%;
+    width: 0%;
+}
+
 
 
 .artist-name {

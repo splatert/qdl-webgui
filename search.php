@@ -190,8 +190,12 @@
                                         if (isset($artist[0]) && $title[0]) {
                                             $both = trim($artist[0]->plaintext) .' - '. trim($title[0]->plaintext);
                                             $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
-
-                                            echo '<button style="margin:unset !important;" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); getDLStatus(\''.$both.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
+                                            
+                                            $art_src = '';
+                                            if (isset($art[0])) {
+                                                $art_src = trim($art[0]->src);
+                                            }
+                                            echo '<button style="margin:unset !important;" onclick="loadingDialog(); getDLStatus(\''.$both.'\', \''.$art_src.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
 
                                         }
 
@@ -352,7 +356,11 @@
                                     $both = trim($artist[1]->plaintext) .' - '. trim($title[0]->plaintext);
                                     $both = preg_replace("/&(amp;)+/", '', $both); $both = preg_replace("/[^A-Za-z0-9]/", '', $both);
 
-                                    echo '<button style="margin:unset !important;" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); getDLStatus(\''.$both.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
+                                    $art_src = '';
+                                    if (isset($art[0])) {
+                                        $art_src = trim($art[0]->src);
+                                    }
+                                    echo '<button style="margin:unset !important;" onclick="loadingDialog(); getDLStatus(\''.$both.'\', \''.$art_src.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
                                 }
 
                                 if (isset($artist[1])) {
