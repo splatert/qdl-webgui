@@ -9,6 +9,8 @@
     error_reporting(E_ALL);
 
     include('lib/simplehtmldom/simple_html_dom.php');
+    
+    include('global.php');
     require_once('topbar.php');
 ?>
 

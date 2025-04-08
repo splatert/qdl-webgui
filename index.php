@@ -2,6 +2,12 @@
 
 
 
+<?php 
+    include('global.php');
+?>
+
+
+
 <html>
     <head>
         <link rel="stylesheet" href="style.css">

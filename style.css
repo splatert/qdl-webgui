@@ -492,6 +492,16 @@ ul {
 }
 
 
+.warn {
+    background: #ffb300;
+    width: 100%;
+    display: block;
+    text-align: center;
+    border: 1px solid #805a02;
+    font-weight: bold;
+  
+}
+
 
 .artist-name {
     color: #3b3b3b;

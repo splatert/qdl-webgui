@@ -137,7 +137,6 @@
                                         if (isset($art[0])) {
                                             $art_src = trim($art[0]->src);
                                         }
-
                                         echo '<script> function dlstatus() { getDLStatus("' .$both.'", "'.$art_src.'") } </script>';
                                     }
 

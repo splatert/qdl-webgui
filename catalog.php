@@ -10,7 +10,7 @@
 
     include('lib/simplehtmldom/simple_html_dom.php');
     require_once('topbar.php');
-
+    include('global.php');
 ?>
 
 

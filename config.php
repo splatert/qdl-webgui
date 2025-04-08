@@ -3,9 +3,9 @@
 
 
 <?php
-    ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
-    error_reporting(E_ALL);
+    // ini_set('display_errors', '1');
+    // ini_set('display_startup_errors', '1');
+    // error_reporting(E_ALL);
     include('lib/simplehtmldom/simple_html_dom.php');
     require_once('topbar.php');
 ?>
@@ -19,7 +19,7 @@
         0 => 'Welcome',
         1 => 'Downloads',
         2 => 'Audio Quality',
-        3 => 'WIP',
+        3 => 'SimpleHTMLDOM',
         4 => 'Complete'
     );
 
@@ -204,7 +204,29 @@
                 <div class="screen" id="screen3"> <div class="container">
                     <div class="top" style="display:flex;">
                             <main>
-                                <h3>WIP</h3>
+                                <h3>Simple HTML DOM Parser</h3>
+                                <p>In order to search for albums, artists, or labels, this program will require
+                                    the SimpleHTMLDom library in order to scrape and return data from the Qobuz website.
+                                    To have this frontend install the library for you, click the button below.
+                                </p>
+
+                                <?php
+                                    require_once('misc/shd_exists.php');
+                                    $installed = shd_installed();
+                                    
+                                    if (!$installed) {
+                                        echo '<span>Status: <b>Not installed</b></span>';
+                                    }
+                                    else {
+                                        echo '<span>Status: <b>Installed</b></span>';
+                                    }
+
+                                ?>
+
+                                <form action="misc/shd_exists.php">
+                                    <input type="hidden" name="action" value="install-shdp">
+                                    <button type="submit">Install</button>
+                                </form>
                             </main>
                     </div>
                 </div></div>
