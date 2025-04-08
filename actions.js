@@ -39,20 +39,9 @@ function preview(button, audioObject) {
 
 
 async function getDLStatus(relTitle, cover) {
-    
-    relTitle = relTitle.replace('/&(amp;)+/', '');
-    relTitle = relTitle.replace('/[^A-Za-z0-9]/', '');
 
-
-    if (cover && cover != '') {
-        document.querySelector('.loading-dialog .album-cover').src = cover;
-    }
-
-    document.querySelector('.loading-dialog .loading-status').style.display = 'none';
-    document.querySelector('.loading-dialog .wheel').style.display = 'none';
-    document.querySelector('.dl-status').style.display = 'unset';
-    document.querySelector('.loading-dialog .album-cover').style.display = 'unset';
-    document.querySelector('.dl-status .top .status-large').innerText = 'Downloading album...';
+    loadingDialog();
+    var coverSet = false;
 
 
     setInterval(() => {
@@ -60,6 +49,27 @@ async function getDLStatus(relTitle, cover) {
         fetch('status.php?rel=' + relTitle)
         .then(status => status.text())
         .then (status => {
+
+
+            if (cover && cover != '') {
+                if (!coverSet) {
+                    coverSet = true;
+                    document.querySelector('.loading-dialog .album-cover').src = cover;
+                }
+            }
+
+
+            // dl ui stuff
+            relTitle = relTitle.replace('/&(amp;)+/', '');
+            relTitle = relTitle.replace('/[^A-Za-z0-9]/', '');
+        
+            document.querySelector('.loading-dialog .loading-status').style.display = 'none';
+            document.querySelector('.loading-dialog .wheel').style.display = 'none';
+            document.querySelector('.dl-status').style.display = 'unset';
+            document.querySelector('.loading-dialog .album-cover').style.display = 'unset';
+            document.querySelector('.dl-status .top .status-large').innerText = 'Downloading album...';
+
+
 
             var statusData = JSON.parse(status)[0]; 
             console.log(statusData);
