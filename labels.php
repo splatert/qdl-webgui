@@ -18,15 +18,15 @@
 
 
 
-<html>
+<html class="<?php echo $sitetheme ?>">
     <head>
 
     </head>
 
-    <body>
+    <body class="">
         <link rel="stylesheet" href="style.css">
 
-        <div class="page">
+        <div class="page <?php echo $sitetheme ?>">
             <?php
                 if (isset($_GET['q']) && $_GET['q'] != '') {
                     echo '<title>'.trim($_GET['q']).' | Qobuz-DL</title>';
@@ -60,7 +60,7 @@
                             $url = $label->find('.CoverModelOverlay');
 
                             if (isset($url[0])) {
-                                echo '<tr class="label">
+                                echo '<tr class="label '.$sitetheme.'">
                                 <td style="width:0"><img src="img/ico/label.png"></td>
                                 <td style="padding-left: 15px";';
                                 echo '<span>

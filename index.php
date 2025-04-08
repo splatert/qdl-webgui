@@ -8,7 +8,7 @@
 
 
 
-<html>
+<html class="<?php echo $sitetheme ?>">
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -19,7 +19,7 @@
         <script src="actions.js"></script>
         <div class="frontpage-search">
             <center>
-                <img class="logo" src="img/logo.png" width="135" height="80">
+                <img class="logo <?php echo $sitetheme ?>" src="img/logo.png" width="135" height="80">
             </center>
 
             <form method="GET" action="search.php">
@@ -35,7 +35,7 @@
             </form>
         </div>
 
-        <table class="frontpage-genres">
+        <table class="frontpage-genres<?php echo $sitetheme ?>">
             <tbody>
                 <tr>
                     <td>

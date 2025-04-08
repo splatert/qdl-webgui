@@ -9,10 +9,11 @@
 
     include('lib/simplehtmldom/simple_html_dom.php');
     require_once('topbar.php');
+    include('global.php');
 ?>
 
 
-<html>
+<html class="<?php echo $sitetheme ?>">
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
@@ -22,7 +23,7 @@
         <script src="actions.js"></script>
         <script>loadingDialog();</script>
 
-        <div class="page">
+        <div class="page <?php echo $sitetheme ?>">
 
             <?php
             
@@ -55,7 +56,7 @@
                     $rel = $dom->find('.album-item')[0];
                     $avgCol = '';
 
-                    echo '<div class="release">';
+                    echo '<div class="release '.$sitetheme.'">';
                     
                         $art = $rel->find('.album-cover img');
                         if (isset($art[0])) {
@@ -151,7 +152,7 @@
                                     }
                                     echo '</div></button>';
 
-                                    echo '<button style="padding:14px"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on Qobuz</a></button>';
+                                    echo '<button class="view-on-qbz '.$sitetheme.'" style="padding:14px"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on Qobuz</a></button>';
 
                                 }
                             echo '</form>';
@@ -162,14 +163,14 @@
 
 
                     if (isset($_GET['url'])) {
-                        echo '<div class="size12" style="padding-bottom: 5px;background: linear-gradient(#fff,#e6e6e6);padding-left: 10px;">';
+                        echo '<div class="size12 toolbar '.$sitetheme.'" style="padding-bottom: 5px;background: linear-gradient(#fff,#e6e6e6);padding-left: 10px;">';
                             echo '<label style="text-shadow: 1px 1px white;" for="qdl-cmd">Qobuz-dl command: </label>';
                             echo '<input class="size12" name="qdl-cmd" onfocus="this.select();" onmouseup="return false;" type="text" value="qobuz-dl dl https://www.qobuz.com'.$_GET['url'].'" ></input>';
                         echo '</div>';
                     }
 
 
-                    echo '<table class="tracklist">';
+                    echo '<table class="tracklist '.$sitetheme.'">';
                             $trackItems = $dom->find('.track');
                             $tracknum = 0;
 

@@ -7,6 +7,7 @@
 
     include('lib/simplehtmldom/simple_html_dom.php');
     require_once('topbar.php');
+    include('global.php');
 
 
     if (isset($_GET['q']) && isset($_GET['type'])) {
@@ -41,14 +42,14 @@
 
 
 
-<html>
+<html class="<?php echo $sitetheme ?>">
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
         <script src="actions.js"></script>
-        <div class="page">
+        <div class="page <?php echo $sitetheme ?>">
 
             <?php
 
@@ -146,7 +147,7 @@
                         $rt = $rows[$row]->find('.typo-padding');
                         if ($rt[0]) {
 
-                            echo '<div class="title1">';
+                            echo '<div class="title1 '.$sitetheme.'">';
                                 $rt2 = $rt[0]->getElementByTagName('h2');
                                 if ($rt2) {
                                     echo '<span>'.$rt2->plaintext.'</span>';
@@ -165,7 +166,7 @@
                                 $releaseURL = 'release.php?url='.urlencode($title[0]->href);
                             }
 
-                            echo '<div class="release2">';
+                            echo '<div class="release2 '.$sitetheme.'">';
 
                                 $art = $rel->find('.album-cover img');
                                 
@@ -178,8 +179,8 @@
                                     echo '<div style="padding-left: 10px;padding-top: 5px;">
                                     <ul>';
                                         if ($artist[0] && $title[0]) {   
-                                            echo '<li class="artist-name">'.trim($artist[0]->plaintext).'</li>';
-                                            echo '<li class="album-title"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
+                                            echo '<li class="artist-name '.$sitetheme.'">'.trim($artist[0]->plaintext).'</li>';
+                                            echo '<li class="album-title'.$sitetheme.'"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
                                         }
                                     echo '</ul></div>';
                                 echo '</div>';
@@ -195,7 +196,7 @@
                                             if (isset($art[0])) {
                                                 $art_src = trim($art[0]->src);
                                             }
-                                            echo '<button style="margin:unset !important;" onclick="loadingDialog(); getDLStatus(\''.$both.'\', \''.$art_src.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
+                                            echo '<button style="margin:unset !important;" onclick="loadingDialog(); getDLStatus(\''.$both.'\', \''.$art_src.'\');" type="submit" class="search-dl-btn '.$sitetheme.'"><img src="img/ico/dl.png"></button>';
 
                                         }
 
@@ -229,7 +230,7 @@
 
                 echo '<title>'.trim($_GET['q']).' | Qobuz-DL</title>';
                 echo '
-                <div class="results-header" style="display: flex;">
+                <div class="results-header '.$sitetheme.'" style="display: flex;">
                     <div class="lf" style="width: 100%;">
                         <span class="title-results">Results for <b>"'.$_GET['q'].'"</b></span>
                     </div>
@@ -249,7 +250,7 @@
                                 <option value="lowhi">Price - Low to high</option>
                                 <option value="newold">Newest to oldest</option>
                             </select>
-                            <button class="arrow-rt-submit" type="submit"></button>
+                            <button class="arrow-rt-submit '.$sitetheme.'" type="submit"></button>
                         </form>
                     </div>
                 </div>
@@ -290,7 +291,7 @@
                 $rels = $dom->find('.ReleaseCard');
 
                 foreach ($rels as $rel) {
-                    echo '<div class="release">';
+                    echo '<div class="release '.$sitetheme.'">';
 
                         $art = $rel->find('.CoverModel');
                         $title = $rel->find('.ReleaseCardInfosTitle');
@@ -360,7 +361,7 @@
                                     if (isset($art[0])) {
                                         $art_src = trim($art[0]->src);
                                     }
-                                    echo '<button style="margin:unset !important;" onclick="loadingDialog(); getDLStatus(\''.$both.'\', \''.$art_src.'\');" type="submit" class="search-dl-btn"><img src="img/ico/dl.png"></button>';
+                                    echo '<button style="margin:unset !important;" onclick="loadingDialog(); getDLStatus(\''.$both.'\', \''.$art_src.'\');" type="submit" class="search-dl-btn '.$sitetheme.'"><img src="img/ico/dl.png"></button>';
                                 }
 
                                 if (isset($artist[1])) {

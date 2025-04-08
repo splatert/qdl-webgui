@@ -1,14 +1,17 @@
 
 
 
+<?php
+    include('global.php');
+?>
 
 <header>
 
-    <div class="topbar">
+    <div class="topbar <?php echo $sitetheme ?>">
         
         <div>
             <a href="/">
-                <img src="img/logo.png" width="67.5" height="40">
+                <img class="logo-mini <?php echo $sitetheme ?>" src="img/logo.png" width="67.5" height="40">
             </a>
 
             <form method="GET" action="search.php">

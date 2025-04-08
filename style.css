@@ -6,6 +6,24 @@ html {
 }
 
 
+html.darkmode {
+    background: #1f1f1f;
+    color: white !important;
+}
+
+.frontpage-genres.darkmode {
+    background-color: #313131;
+    border: 1px solid #494949;
+    box-shadow: 4px 4px #1d2124;
+}
+.frontpage-genres.darkmode > tbody > tr > td > ul > li > a {
+    color: white !important;
+}
+.logo.darkmode, .logo-mini.darkmode {
+    filter: brightness(1000%);
+}
+
+
 .setup-screens > .screen > .container {
     padding: 10px;
 }
@@ -273,8 +291,9 @@ tbody > .label > td > span > a {
 tbody > .label:nth-child(2n) {
     background-color: #fafafa;
 }
-
-
+tbody > .label.darkmode:nth-child(2n) {
+    background-color: #2b2b2b;
+}
 
 .frontpage-genres > tbody > tr > td > ul > li > .mini {
     font-size: 12px;
@@ -403,16 +422,63 @@ a {
     color: white;
 }
 
+
+.view-on-qbz.darkmode {
+    background: unset;
+    border: 1px solid white;
+    border-radius: 5px;  
+}
+
+
+.warn.darkmode {
+    background: #313131;
+    width: 100%;
+    display: block;
+    text-align: center;
+    border: 1px solid #494949;
+    font-weight: bold;
+}
+.warn.darkmode > a {
+    color: #8cbd1a;
+}
+
+
+.search-dl-btn.darkmode {
+    background: #3a3a3a;
+    border: 1px solid #444;
+}
+
+
+
+.toolbar.darkmode {
+    background: linear-gradient(#464646,#313131) !important;
+}
+.toolbar.darkmode > label {
+    color: white;
+    text-shadow: unset !important;
+}
+
 .tracklist > tbody > tr > td {
     border: 1px solid gainsboro;
     padding: 5px;
     font-size: 14px;
 }
 
+.tracklist.darkmode > tbody > tr > td {
+    border: 1px solid #7b7b7b;
+}
+
+
+
 .tracklist > tbody > tr:nth-child(2n+0) {
     background-color: #f7f7f7;
 }
-
+.tracklist.darkmode > tbody > tr:nth-child(2n) {
+    background-color: #464646;
+}
+.tracklist.darkmode > tbody > tr {
+    color: white;
+}
 
 .enlarge-cover {
     text-align: center;
@@ -450,6 +516,32 @@ a {
     border: 1px solid #f0f0f0;
     background: linear-gradient(#f9f9f9,white);
 }
+
+
+.page.darkmode {
+    background-color: #313131;
+    border: 1px solid #484848;
+}
+
+
+.results-header.darkmode, .label-details.darkmode {
+    background: #363636;
+}
+
+
+.arrow-rt-submit.darkmode {
+    filter: invert();
+}
+
+.release.darkmode, .release2.darkmode {
+    background: linear-gradient(#3a3a3a,#2d2d2d);
+    border: 1px solid #626060;
+}
+.artist-name.darkmode, .album-title.darkmode > a,.release.darkmode a, .release.darkmode > ul > li, .theme-sel.darkmode > a,
+.results-header.darkmode > div > span, .genre-title, tbody > .label.darkmode > td > a, .label-details.darkmode {
+    color: white;
+}
+
 
 .release2 {
     display: flex;
@@ -532,6 +624,12 @@ ul {
     border-bottom: unset;
 }
 
+.topbar.darkmode {
+    background: linear-gradient(180deg, #363636,#1f1f1f);
+    border-color: #3a3a3a;
+}
+
+
 .title1 {
     padding: 5px;
     margin-top: 15px;
@@ -542,6 +640,12 @@ ul {
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+
+.title1.darkmode {
+    color: black;
+    background: #fff;
 }
 
 

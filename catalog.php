@@ -14,14 +14,14 @@
 ?>
 
 
-<html>
+<html class="<?php echo $sitetheme ?>">
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
         <script src="actions.js"></script>
-        <div class="page">
+        <div class="page <?php echo $sitetheme ?>">
             <?php
 
                 if (isset($_GET['url']) && $_GET['url'] != '') {
@@ -56,7 +56,7 @@
                     $dom->load($response);
 
 
-                    echo '<div class="label-details">
+                    echo '<div class="label-details '.$sitetheme.'">
                         <aside>
                             <img src="img/misc/label64.png">
                         </aside>
@@ -102,7 +102,7 @@
                         $prodinfo = $item->find('.product__infos');
                         $link = $item->find('.product__container');
 
-                        echo '<div class="release">';
+                        echo '<div class="release '.$sitetheme.'">';
                             
                             echo '<aside>';
                                 $cover = $item->find('.product__cover');
@@ -116,11 +116,11 @@
                             
                             echo '<main style="padding-left: 10px;"><ul>';
                                 if (isset($artist[0])) {
-                                    echo '<li class="artist-name">'.$artist[0]->firstChild()->plaintext.'</li>';
+                                    echo '<li class="artist-name '.$sitetheme.'">'.$artist[0]->firstChild()->plaintext.'</li>';
                                 }
 
                                 if (isset($title[0]) && isset($link[0])) {
-                                    echo '<li class="album-title"><a href="release.php?url='.$link[0]->firstChild()->href.'"><b>'.$title[0]->plaintext.'</b></a></li>';
+                                    echo '<li class="album-title '.$sitetheme.'"><a href="release.php?url='.$link[0]->firstChild()->href.'"><b>'.$title[0]->plaintext.'</b></a></li>';
                                 }
 
                                 if (isset($prodinfo[0])) {
