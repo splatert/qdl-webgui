@@ -10,7 +10,7 @@
 ?>
 
 
-<html>
+<html class="<?php echo $sitetheme ?>">
     <head>
         <link rel="stylesheet" href="style.css">
     </head>
