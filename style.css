@@ -153,6 +153,12 @@ html.darkmode {
     box-shadow: 0px 3px 6px #0000002b;
 }
 
+
+.dl-details.darkmode {
+    background: #1f1f1f;
+}
+
+
 .dl-details > .aside > img {
     height: 92px;
 }
@@ -231,6 +237,10 @@ html.darkmode {
     max-width: 50%;
     background: linear-gradient(#fff,#f9f9f9);
     border: 1px solid #b3b3b3;
+}
+
+.center-dialog.darkmode {
+    background: linear-gradient(#484848,#202020);
 }
 
 

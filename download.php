@@ -18,9 +18,9 @@
 
     <body>
         <script src="actions.js?v=3"></script>
-        <div class="center-dialog">
+        <div class="center-dialog <?php echo $sitetheme ?>">
 
-            <div class="dl-details">
+            <div class="dl-details <?php echo $sitetheme ?>">
                 <div class="aside">
                     <?php
                         if (isset($_GET['img'])) {
