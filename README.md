@@ -26,6 +26,7 @@ QDL-WebGUI is an experimental and incomplete UI frontend for qobuz-dl. It is wri
 4. Download progress - Done
 5. Settings page to edit config.ini - Partially Done
 6. Convert links for featured album/discography banners to work with this frontend - Partially Done (Some links are for artist pages which this frontend doesn't have yet. I will have that done soon.)
+7. Discogs tagger? - hmm
 
 
 ## Screenshots
