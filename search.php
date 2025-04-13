@@ -14,6 +14,9 @@
         if ($_GET['type'] == 'labels') {
             header('Location: labels.php?q='.$_GET['q']);
         }
+        elseif ($_GET['type'] == 'artists') {
+            header('Location: artists.php?q='.$_GET['q']);
+        }
     }
 
 
@@ -117,6 +120,9 @@
                                         else if (str_starts_with($url, 'https://www.qobuz.com/store-router/search?q=')) {
                                             $url = str_replace('https://www.qobuz.com/store-router/search', 'search.php', $url);
                                         }
+                                        else if (str_starts_with($url, 'https://www.qobuz.com/store-router/interpreter/')) {
+                                            $url = str_replace('https://www.qobuz.com/store-router/interpreter/', 'catalog.php?view-as=artist&url=/us-en/interpreter/', $url);
+                                        }
                                         else {
                                             $url = 'release.php?url=' . $banners_a[$banner]->href;
                                         }
@@ -178,8 +184,9 @@
 
                                     echo '<div style="padding-left: 10px;padding-top: 5px;">
                                     <ul>';
+
                                         if ($artist[0] && $title[0]) {   
-                                            echo '<li class="artist-name '.$sitetheme.'">'.trim($artist[0]->plaintext).'</li>';
+                                            echo '<li class="artist-name '.$sitetheme.'"> <a href="catalog.php?view-as=artist&url='.$artist[0]->href.'">'.trim($artist[0]->plaintext).'</a> </li>';
                                             echo '<li class="album-title'.$sitetheme.'"><a href="'.$releaseURL.'">'.trim($title[0]->plaintext).'</a></li>';
                                         }
                                     echo '</ul></div>';
@@ -308,9 +315,10 @@
 
                         echo '<ul style="width: 75%;">';
                             $artist = $rel->find('.ReleaseCardInfosSubtitle');
+                            $artistURL = $rel->find('.ReleaseCardInfosSubtitle a');
 
-                            if ($artist[1] && $title[0]) {
-                                echo '<li class="artist-name">'.$artist[1]->plaintext.'</li>';
+                            if ($artist[1] && $artistURL[0] && $title[0]) {
+                                echo '<li class="artist-name"><a href="catalog.php?view-as=artist&url='.$artistURL[0]->href.'">'.$artist[1]->plaintext.'</a></li>';
                                 echo '<li class="album-title"><a href="'.$releaseURL.'">'.$title[0]->plaintext.'</a></li>';
                             }
 
@@ -423,10 +431,6 @@
 
 
         </div>
-
-        <?php
-            require_once('footer.php');
-        ?>
 
     </body>
 

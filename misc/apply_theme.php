@@ -19,7 +19,12 @@
             }
         }
 
-        header('Location: /');
+        if (isset($_GET['ret'])) {
+            header('Location: ' .$_GET['ret']);
+        }
+        else {
+            header('Location: /');
+        }
     }
 
 ?>

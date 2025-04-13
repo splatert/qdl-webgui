@@ -57,9 +57,29 @@
 
 
                     echo '<div class="label-details '.$sitetheme.'">
-                        <aside>
-                            <img src="img/misc/label64.png">
-                        </aside>
+                        <aside>';
+                        
+                            if (isset($_GET['view-as']) && $_GET['view-as'] == 'artist') {
+                                $pfp = $dom->find('.catalog-heading__picture');
+                                if (isset($pfp[0])) {
+                                    $attr = $pfp[0]->getAttribute('style');
+                                    $imgurl = preg_match_all('/(?:\([\'"]?)(.*?)(?:[\'"]?\))/', $attr, $matches);
+
+                                    if (isset($matches[1])) {
+
+                                        if ($matches[1][0] == '/assets-static/img/common/default_artist.svg') {
+                                            $matches[1][0] = 'img/misc/artist128.png';
+                                        }
+
+                                        echo '<img class="artist-pic" src="'.$matches[1][0].'">';
+                                    }
+                                }
+                            }
+                            else {
+                                echo '<img src="img/misc/label64.png">';
+                            }
+
+                        echo '</aside>
                     <main><ul>';
                         $label_title = $dom->find('.catalog-heading__title');
                         if (isset($label_title[0])) {
@@ -88,10 +108,23 @@
                         </form>
                         </li>';
 
-                    echo '</ul></main></div>
+                    echo '</ul></main>';
+                    echo '</div>';
+
+                    if (isset($_GET['view-as']) && $_GET['view-as'] == 'artist') {
+                        
+                        $desc = '';
+                        $profile_info = $dom->find('#catalog-heading__text');
+                        if (isset($profile_info[0])) {
+                            $desc = trim(htmlentities($profile_info[0]->plaintext));
+                            if ($desc != 'Read more') {
+                                echo '<p class="artist-desc">'.$desc.'</p>';
+                            }
+                        }
+                    }
 
 
-                    <hr size="1" color="#c6c6c6">';
+                    echo '<hr size="1" color="#c6c6c6">';
 
 
                     $items = $dom->find('.product__item');

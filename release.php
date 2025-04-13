@@ -194,7 +194,7 @@
                                     ';
 
                                     if (isset($title[0]) && isset($infos[0])) {
-                                        echo '<td style="text-align:center;width:10%;"><a class="noline" target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'"><b>ⓘ</b></a></td>';
+                                        echo '<td style="text-align:center;width:10%;"><a class="noline info-ico '.$sitetheme.'" target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'"><b>ⓘ</b></a></td>';
                                     }
                                     else {
                                         echo '<td><center>N/A</center></td>';
@@ -224,9 +224,6 @@
             <script>removeLoadingDialog();</script>
         </div>
 
-        <?php
-            require_once('footer.php');
-        ?>
     </body>
 
 

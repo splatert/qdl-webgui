@@ -14,9 +14,53 @@
     </head>
 
 
-    <body>
+    <body class="bg <?php echo $sitetheme ?>">
         <title>QobuzDL</title>
         <script src="actions.js"></script>
+
+        <div class="top">
+
+            <script>
+                fetch('misc/is_premium.php')
+                    .then(status => status.text())
+                    .then(status => {
+
+                        document.querySelector('.account-status .spinner').style.display = 'none';
+                        document.querySelector('.account-status').style.opacity = 'unset';
+
+                        var premiumData = JSON.parse(status);
+                        if (premiumData) {
+                            if (premiumData[0] && premiumData[0] == true) {
+                                if (premiumData[1]) {
+                                    document.querySelector('.account-status div .bottom .top').innerText = premiumData[1];
+                                    document.querySelector('.account-status div .bottom').className += ' premium';
+                                }
+                            }
+                            else {
+                                document.querySelector('.account-status div .bottom .top').innerText = 'free account';
+                                document.querySelector('.account-status div .bottom').className += 'not-premium';
+                            }
+                        }
+                    })
+            </script>
+
+            <div class="account-status <?php echo $sitetheme ?>" style="opacity: 0.5;">
+                <aside>
+                    <img src="img/ico/user64.png">
+                </aside>
+
+                <div style="padding-left: 15px;">
+                    <span class="top size12">Membership status</span>
+                    <ul class="bottom">
+                        <li class="top">PLEASE WAIT</li>
+                    </ul>
+                </div>
+                <img class="spinner" src="img/ico/load2.gif">
+
+            </div>
+        </div>
+
+
         <div class="frontpage-search">
             <center>
                 <img class="logo <?php echo $sitetheme ?>" src="img/logo.png" width="135" height="80">
@@ -29,6 +73,10 @@
                     <br>
                 <input type="radio" checked="checked" name="type" value="search">
                 <label for="type">Albums</label>
+
+                <input type="radio" name="type" value="artists">
+                <label for="type">Artists</label>
+
                 <input type="radio" name="type" value="labels">
                 <label for="type">Labels</label>
 

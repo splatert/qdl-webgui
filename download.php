@@ -53,23 +53,25 @@
 
 
                         function removeStatusLogFile($path) {
-                            unlink($path);
+                            if ($path) {
+                                unlink($path);
+                            }
                         }
 
 
                         function createStatusLogFile($dir, $title) {
+                            if ($dir && $title) {
+                                // fix directory
+                                $dir = trim($dir);
+                                // filter out illegal characters
+                                $title = preg_replace("/[^A-Za-z0-9]/", '', $title);
 
-                            // fix directory
-                            $dir = trim($dir);
-                            // filter out illegal characters
-                            $title = preg_replace("/[^A-Za-z0-9]/", '', $title);
+                                chdir($dir);
+                                fopen($title . '.log', 'w');
 
-                            chdir($dir);
-                            fopen($title . '.log', 'w');
-
-                            $fullpath = $dir .'/'. $title . '.log';
-                            return $fullpath;
-
+                                $fullpath = $dir .'/'. $title . '.log';
+                                return $fullpath;
+                            }
                         }
 
 
@@ -79,8 +81,8 @@
 
                         if (isset($_GET['mode'])) {
                             
-                            if ($_GET['mode'] == 'lucky') {
-                                $mode = 'lucky';
+                            if ($_GET['mode'] == 'dl' || $_GET['mode'] == 'lucky') {
+                                $mode = $_GET['mode'];
                             }
 
                             if ($_GET['mode'] == 'purge') {
@@ -108,12 +110,14 @@
 
                         if (isset($_GET['url']) || isset($_GET['q'])) {
 
+                            
                             if (isset($_GET['url']) && $_GET['url'] == '') {
                                 die('URL required.');
                             }
                             if (isset($_GET['q']) && $_GET['q'] == '') {
                                 die('Please provide a query.');
                             }
+
 
                             // download, lucky
                             if ($mode == 'dl') {
@@ -153,6 +157,7 @@
                             exec($app. ' ' .$cmd, $output);
 
                             $lastline = $output[count($output) - 1];
+
                         }
                         
                         if ($lastline == 'Completed') {
@@ -172,10 +177,18 @@
                             $error_type = 'not_premium';
                         }
 
-                        // removeStatusLogFile($logfile);
+                        if (isset($logfile) && $logfile != '') {
+                            removeStatusLogFile($logfile);
+                        }
                         
-                        echo '<title>'.$lastline.' | QobuzDL</title>';
-                        echo $lastline;
+                        if (isset($lastline) && $lastline != '') {
+                            echo '<title>'.$lastline.' | QobuzDL</title>';
+                            echo $lastline;
+                        }
+                        else {
+                            echo '<title>QobuzDL</title>';
+                        }
+                        
                     ?>
                 </span>
                 <span class="instr">
@@ -234,12 +247,6 @@
                                 echo '<button class="btn2" style="margin-left:5px;" type="submit" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); dlstatus();">Download anyway</button>';
                             }
                         echo '</form>';
-                    }
-
-                    elseif ($error_type == 'bad_credentials') {
-                        echo '<button class="btn2" style="margin-left:5px;">
-                            <a class="white-noline" href="config.php">Reset config</a>
-                        </button>';
                     }
 
                 ?>

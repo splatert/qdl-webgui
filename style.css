@@ -313,10 +313,106 @@ tbody > .label.darkmode:nth-child(2n) {
 }
 
 
+
+.account-status {
+    width: fit-content;
+    display: flex;
+    padding: 15px;
+    position: fixed;
+    top: 15; left: 15px;
+    background: linear-gradient(#fff,#f9f9f9);
+    box-shadow: 2px 2px #c2c2c2;
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.account-status.darkmode {
+    background: #313131;
+    border: 1px solid #494949;
+    box-shadow: unset;
+}
+.account-status.darkmode > div > .top {
+    color: white;
+}
+
+
+.account-status > div > .top {
+    color: black;
+}
+
+
+
+.bg {
+    background-image: url('img/misc/bg.png');
+    background-size: cover;
+}
+
+
+.bg.darkmode {
+    background-image: unset;
+}
+
+.artist-desc {
+    max-height: 135px;
+    overflow-y: scroll;
+    border: 1px solid gray;
+    padding: 5px;
+    font-size: 14px;
+}
+
+
+.artist-result.darkmode > td > a {
+    color: white;
+}
+
+
+.artist-result > td > .pic, .artist-pic {
+    height: 75px;
+}
+
+
+.account-status > aside > img {
+    height: 32px;
+}
+
+.account-status > .spinner {
+    height: 15px;
+}
+
+.account-status > div > .bottom {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: gray;
+}
+.account-status > div > .bottom.premium {
+    color: #8cbd1a !important;
+}
+.account-status > div > .bottom.not-premium {
+    color: #bd1a1a !important;
+}
+
+
+
+.theme-btn::before {
+    content: url('img/ico/moon.png');
+}
+
+
+
+.vinyl-ico.darkmode, .info-ico.darkmode {
+    filter: invert();
+}
+
+
 .title-results {
     color: #424242;
     display: block;
     margin: 10px;
+}
+
+.title-results.darkmode {
+    color: white;
 }
 
 
@@ -547,7 +643,7 @@ a {
     background: linear-gradient(#3a3a3a,#2d2d2d);
     border: 1px solid #626060;
 }
-.artist-name.darkmode, .album-title.darkmode > a,.release.darkmode a, .release.darkmode > ul > li, .theme-sel.darkmode > a,
+.artist-name.darkmode, .artist-name.darkmode > a, .album-title.darkmode > a,.release.darkmode a, .release.darkmode > ul > li, .theme-sel.darkmode > a,
 .results-header.darkmode > div > span, .genre-title, tbody > .label.darkmode > td > a, .label-details.darkmode {
     color: white;
 }
@@ -605,10 +701,16 @@ ul {
 }
 
 
-.artist-name {
+.artist-name, .artist-name > a {
     color: #3b3b3b;
     font-size: 12px;
+    text-decoration: none;
 }
+
+.artist-name > a:hover {
+    text-decoration: underline;
+}
+
 
 .album-title {
     font-weight: bold;
