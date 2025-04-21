@@ -12,7 +12,8 @@ QDL-WebGUI is an experimental and incomplete UI frontend for qobuz-dl. It is wri
 
 
 ## Requirements
-- An installation of qobuz-dl that's already set up.
+- An installation of qobuz-dl that's done with **pipx** and is set up.
+
 - A Qobuz account with an active streaming subscription.
 - simplehtmldom installed to the projects directory in the following path: qdlwebgui/lib/simplehtmldom/
   
