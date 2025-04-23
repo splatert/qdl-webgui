@@ -10,6 +10,7 @@
     include('lib/simplehtmldom/simple_html_dom.php');
     include('global.php');
     require_once('topbar.php');
+    include('misc/theme_ctrl.php');
 
 ?>
 

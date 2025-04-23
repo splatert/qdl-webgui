@@ -2,6 +2,10 @@
 
 
 
+<!-- this is pretty bad. Gonna have to redo it. -->
+
+
+
 <?php
 
     ini_set('display_errors', '1');
@@ -10,7 +14,7 @@
 
     include('lib/simplehtmldom/simple_html_dom.php');
     
-    include('global.php');
+    require_once('global.php');
     require_once('topbar.php');
 ?>
 

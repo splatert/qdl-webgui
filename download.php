@@ -6,7 +6,7 @@
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
     error_reporting(E_ALL);
-    include('global.php');
+    require_once('global.php');
 ?>
 
 
@@ -60,23 +60,29 @@
 
 
                         function createStatusLogFile($dir, $title) {
-                            if ($dir && $title) {
-                                // fix directory
-                                $dir = trim($dir);
-                                // filter out illegal characters
-                                $title = preg_replace("/[^A-Za-z0-9]/", '', $title);
+                            if ($dir) {
+                                
+                                if (file_exists($dir)) {
+                                    // fix directory
+                                    $dir = trim($dir);
+                                    // filter out illegal characters
+                                    $title = preg_replace("/[^A-Za-z0-9]/", '', $title);
 
-                                chdir($dir);
-                                fopen($title . '.log', 'w');
+                                    chdir($dir);
+                                    fopen($title . '.log', 'w');
 
-                                $fullpath = $dir .'/'. $title . '.log';
-                                return $fullpath;
+                                    $fullpath = $dir .'/'. $title . '.log';
+                                    return $fullpath;
+                                }
+
                             }
                         }
 
 
-                        $user = exec('whoami');
-                        $app = "/home" ."/". $user . "/.local/pipx/venvs/qobuz-dl/bin/python /home/".$user."/.local/pipx/venvs/qobuz-dl/bin/qobuz-dl";
+                        $app = new Qobuz_DL;
+                        $appLink = $app->getAppLink();
+                        putenv("HOME=/home/{$app->getUser()}");
+
                         $mode = 'dl';
 
                         if (isset($_GET['mode'])) {
@@ -86,16 +92,13 @@
                             }
 
                             if ($_GET['mode'] == 'purge') {
-
-                                putenv('HOME=/home/'.$user);
-                                exec($app . ' -p 2>&1', $out);
+                                exec($appLink . ' -p 2>&1', $out);
 
                                 echo 'Database has been purged.';
                                 echo '<script> setTimeout(() => {history.back()}, 2000);</script>';
                                 die();
                             }
                             elseif ($_GET['mode'] == 'abort-dl') {
-                                putenv('HOME=/home/'.$user);
                                 exec('killall qobuz-dl', $out);
 
                                 echo 'Download aborted.';
@@ -137,24 +140,23 @@
                                 $cmd .= ' --no-db';
                             }
 
-                            $user = exec('whoami');
-                            $cfg_path = "/home/".$user.'/.config/qobuz-dl/config.ini';
-                            $config = file($cfg_path, FILE_SKIP_EMPTY_LINES);
-                            $dlPath = explode('default_folder = ', $config[3]);
+
+                            include_once('cfgfile.php');
+                            $config = new ConfigFile();
+                            $dlPath = $config->getProperty('default_folder');
                             
-                            $logfile = '';
 
-                            putenv('HOME=/home/'.$user);
-
-                            if (isset($dlPath[1]) && $dlPath[1] != '') {
+                            $logFile = null;
+                            if (isset($dlPath) && $dlPath != '') {
                                 if (isset($_GET['artist']) && isset($_GET['title'])) {
-                                    $logfile = createStatusLogFile($dlPath[1], trim($_GET['artist'].' - '. $_GET['title']));
+                                    $logFile = createStatusLogFile($dlPath, trim($_GET['artist'].' - '. $_GET['title']));
                                 }
-                                chdir(trim($dlPath[1]));
+                                chdir(trim($dlPath));
                             }
 
-                            $cmd .= ' 2>&1 | tee ' .$logfile;
-                            exec($app. ' ' .$cmd, $output);
+                            
+                            $cmd .= ' 2>&1 | tee "'.$logFile.'" ';
+                            exec("{$appLink} {$cmd}", $output);
 
                             $lastline = $output[count($output) - 1];
 
@@ -178,7 +180,7 @@
                         }
 
                         if (isset($logfile) && $logfile != '') {
-                            removeStatusLogFile($logfile);
+                            // removeStatusLogFile($logfile);
                         }
                         
                         if (isset($lastline) && $lastline != '') {

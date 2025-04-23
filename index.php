@@ -3,7 +3,29 @@
 
 
 <?php 
+    include('misc/theme_ctrl.php');
     include('global.php');
+
+    include_once('cfgfile.php');
+    $cfgFile = new ConfigFile;
+
+    if (!file_exists($cfgFile->getPath())) {
+        echo '<div class="dialog-container">
+            <div class="dialog '.$sitetheme.'">
+                <span>It seems that you are new to qobuz-dl. Use one of the methods below to create a configuration file.</span>
+
+                <br><h4>Using the terminal</h4>
+                <span>Run <span class="code">qobuz-dl -r</span></span>
+
+                <br><h4>Using the frontend</h4>
+                <a href="setup.php?step=0">Please visit the setup wizard</a>
+
+            </div>
+        </div>
+        ';
+    }
+
+
 ?>
 
 
@@ -18,10 +40,20 @@
         <title>QobuzDL</title>
         <script src="actions.js"></script>
 
+
+        <?php
+            include_once('misc/shd_exists.php');
+            $shd_installed = shd_installed();
+            if (!$shd_installed) {
+                echo '<span class="warn '.$sitetheme.'">SimpleHTMLDom is not installed. <a href="../config.php?step=3">Click here</a> to install it.</span>';
+            }
+        ?>
+
+
         <div class="top">
 
             <script>
-                fetch('misc/is_premium.php')
+                fetch('misc/myaccount.php')
                     .then(status => status.text())
                     .then(status => {
 
@@ -30,15 +62,22 @@
 
                         var premiumData = JSON.parse(status);
                         if (premiumData) {
-                            if (premiumData[0] && premiumData[0] == true) {
-                                if (premiumData[1]) {
-                                    document.querySelector('.account-status div .bottom .top').innerText = premiumData[1];
-                                    document.querySelector('.account-status div .bottom').className += ' premium';
+                            if (premiumData != null) {
+                                if (premiumData[0] == true) {
+                                    if (premiumData[1]) {
+                                        document.querySelector('.account-status div .bottom .top').innerText = premiumData[1];
+                                        document.querySelector('.account-status div .bottom').className += ' premium';
+                                    }
                                 }
-                            }
-                            else {
-                                document.querySelector('.account-status div .bottom .top').innerText = 'free account';
-                                document.querySelector('.account-status div .bottom').className += 'not-premium';
+                                else {
+                                    document.querySelector('.account-status div .bottom .top').innerText = 'free account';
+                                    document.querySelector('.account-status div .bottom').className += ' not-premium';
+                                }
+
+                                if (premiumData[2]) {
+                                    document.querySelector('.account-status div .top').innerText = premiumData[2];
+                                }
+
                             }
                         }
                     })
@@ -49,13 +88,27 @@
                     <img src="img/ico/user64.png">
                 </aside>
 
-                <div style="padding-left: 15px;">
-                    <span class="top size12">Membership status</span>
+                <div style="padding-left: 15px; display: grid;">
+                    <span class="top size12">abc***def@ghi.jk</span>
+                    <span class="mid size12">Membership status</span>
                     <ul class="bottom">
                         <li class="top">PLEASE WAIT</li>
                     </ul>
                 </div>
                 <img class="spinner" src="img/ico/load2.gif">
+
+                <div class="line"></div>
+
+                <div class="options">
+                    <ul>
+                        <li>
+                            <a href="setup.php?step=3">Switch account</a>
+                        </li>
+                        <li>
+                            <a href="setup.php?step=0">Setup wizard</a>
+                        </li>
+                    </ul>
+                </div>
 
             </div>
         </div>
@@ -203,10 +256,6 @@
                 </tr>
             </tbody>
         </table>
-
-        <?php
-            require_once('footer.php');
-        ?>
 
     </body>
 </html>

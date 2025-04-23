@@ -38,7 +38,7 @@
                     exec('wget https://sourceforge.net/projects/simplehtmldom/files/latest/download -O shtmldom.zip && unzip shtmldom.zip && rm shtmldom.zip');
 
 
-                    echo 'SimpleHTMLDOM has been successfully installed.  <a href="../config.php?step=3">Go back</a>';
+                    header('Location: ../setup.php?step=5');
 
                 }
             }

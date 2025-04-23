@@ -3,29 +3,87 @@
 
 
 <?php
-    include_once('misc/shd_exists.php');
 
-    $sitetheme = '';
-    if (isset($_COOKIE['theme'])) {
-        $sitetheme = ' ' . $_COOKIE['theme'];
+    if (!class_exists('Qobuz_DL')) {
+
+        class Qobuz_DL {
+            public $python_binary;
+            public $qobuz_dl_binary;
+
+
+            function __construct() {
+                $this->detectApp();
+            }
+
+
+            function getUser() {
+                $user = exec('whoami');
+                return $user;
+            }
+
+
+            function getPythonPath() {
+                return $this->python_binary;
+            }
+
+            function getAppPath() {
+                return $this->qobuz_dl_binary;
+            }
+
+
+            function getAppLink() {
+                if ($this->python_binary && $this->python_binary != '' && $this->qobuz_dl_binary && $this->qobuz_dl_binary != '') {
+                    $link = $this->python_binary . ' ' . $this->qobuz_dl_binary;
+                    return $link;
+                }
+                else {
+                    return false;
+                }
+            }
+
+    
+            function detectApp() {
+    
+                // Find links to python binaries based on install location.
+                // Haven't tested this on regular python.
+
+                $user = $this->getUser();
+                $find = "/home/{$user}/.local/pipx/venvs/qobuz-dl/bin/python";
+
+                if (file_exists($find)) {
+                    $this->python_binary = $find;
+                    $this->qobuz_dl_binary = "/home/{$user}/.local/bin/qobuz-dl";
+                }
+                else {
+                    $this->python_binary = '/usr/bin/python3';
+                    $this->qobuz_dl_binary = '/usr/bin/qobuz-dl';
+                }
+            }
+
+    
+        }
     }
 
-    $shd_installed = shd_installed();
-    if (!$shd_installed) {
-        echo '<span class="warn '.$sitetheme.'">SimpleHTMLDom is not installed. <a href="../config.php?step=3">Click here</a> to install it.</span>';
+
+
+    global $sitetheme;
+    if (isset($_COOKIE['theme'])) {
+        $sitetheme = ' ' . $_COOKIE['theme'];
     }
 
     $ret = '&ret='.urlencode($_SERVER['REQUEST_URI']);
 
 
-    echo '<header class="theme-sel '.$sitetheme.'" style="width: fit-content;position: absolute;top: 0;right: 0;padding: 15px;">';
-        if (isset($_COOKIE['theme']) && $_COOKIE['theme'] == 'darkmode') {
-            echo '<a class="theme-btn" href="misc/apply_theme.php?theme=classic'.$ret.'">Classic Theme</a>';
+
+    if (!function_exists('editCookie')) {
+        function editCookie($name, $value) {
+            $expires = time() + 31556926;
+            if ($value == null) {
+                $expires = time() - 31556926;  
+            }
+            setcookie($name, $value, $expires, "/"); 
         }
-        else {
-            echo '<a class="theme-btn" href="misc/apply_theme.php?theme=darkmode'.$ret.'">Dark theme</a>';
-        }
-    echo '</header>';
+    }
 
 
 ?>

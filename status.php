@@ -7,52 +7,50 @@
     function getStatusMessage($relTitle) {
 
         $user = exec('whoami');
-        $cfg_path = "/home/".$user.'/.config/qobuz-dl/config.ini';
-        $config = file($cfg_path, FILE_IGNORE_NEW_LINES);
+        include_once('cfgfile.php');
         
-        if (isset($config[3])) {
-            $dlPath = explode('default_folder = ', $config[3]);
+        $config = new ConfigFile();
+        $dlpath = $config->getProperty('default_folder');
 
-            if (isset($dlPath[1])) {
 
-                // fix directory, filter out illegal characters, replace spaces with dashes
-                $path = trim($dlPath[1]);
-                $relTitle = preg_replace("/&(amp;)+/", '', $relTitle);
-                $relTitle = preg_replace("/[^A-Za-z0-9]/", '', $relTitle);
+        if (isset($dlpath)) {
 
-                $path = trim($dlPath[1]) . '/' . trim($relTitle);
+            // fix directory, filter out illegal characters, replace spaces with dashes
+            $relTitle = preg_replace("/&(amp;)+/", '', $relTitle);
+            $relTitle = preg_replace("/[^A-Za-z0-9]/", '', $relTitle);
 
-                if (file_exists($path . '.log')) {
+            $path = $dlpath . '/' . trim($relTitle);
 
-                    $file = file_get_contents($path . '.log');
-                    $file = trim(preg_replace('/[\r\n]+/', '\n', $file));
+            if (file_exists($path . '.log')) {
 
-                    $file = explode('\n', $file);
+                $file = file_get_contents($path . '.log');
+                $file = trim(preg_replace('/[\r\n]+/', '\n', $file));
+                $file = explode('\n', $file);
 
-                    $lastline = $file[count($file)-1];
-                    if (isset($lastline)) {
-                        $str = strip_tags($lastline);
+                $lastline = $file[count($file)-1];
+                if (isset($lastline)) {
 
-                        $reg = '/(\d*\.?\dM)|( \/\/\/ )|(\d*\.?\d*.tmp)/m';
-                        preg_match_all($reg, $str, $out);
+                    $str = strip_tags($lastline);
 
-                        if (isset($out)) {
-                            echo json_encode($out);
-                        }
-                        
+                    $reg = '/(\d*\.?\dM)|( \/\/\/ )|(\d*\.?\d*.tmp)/m';
+                    preg_match_all($reg, $str, $out);
+
+                    if (isset($out)) {
+                        echo json_encode($out);
                     }
-                    else {
-                        echo '';
-                    }
+                    
                 }
                 else {
-                    echo '[Log file does not exist.]';
-                    echo '<br> <b>NULL: </b>'.$path . '.log';
+                    echo '';
                 }
-
-
-
             }
+            else {
+                echo '[Log file does not exist.]';
+                echo '<br> <b>NULL: </b>'.$path . '.log';
+            }
+
+
+
         }
         
 

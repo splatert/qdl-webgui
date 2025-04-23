@@ -7,6 +7,7 @@
 
     include('lib/simplehtmldom/simple_html_dom.php');
     require_once('topbar.php');
+    include('misc/theme_ctrl.php');
     include('global.php');
 
 
@@ -247,6 +248,7 @@
                             
                             <select name="type" style="padding: unset;margin-right: 15px;">
                                 <option value="search">Albums</option>
+                                <option value="artists">Artists</option>
                                 <option value="labels">Labels</option>
                             </select>
 

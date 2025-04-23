@@ -24,8 +24,28 @@ html.darkmode {
 }
 
 
+
+.auth-form {
+    display: grid;
+    width: fit-content;
+    margin: auto;
+    padding: 15px;
+    border: 1px solid gray;
+}
+
+
+.auth-form > input {
+    margin-bottom: 10px;
+}
+
+
+
 .setup-screens > .screen > .container {
     padding: 10px;
+    border: 1px solid #a8a8a8;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 
@@ -43,6 +63,27 @@ html.darkmode {
     background: linear-gradient(rgb(255, 255, 255) 0%, rgb(241, 241, 241) 50%, rgb(225, 225, 225) 51%, rgb(246, 246, 246) 100%);
 }
 
+
+.setup-progress > .step > a {
+    text-decoration: none;
+}
+
+
+
+.btn5.darkmode {
+    background: #8cbd1a;
+    border: unset;
+    color: black;
+    padding: 10px;
+}
+
+
+
+.setup-progress.darkmode {
+    background: #414244;
+}
+
+
 .setup-progress > .step, .setup-progress > .arrow {
     width: 100%;
     text-align: center;
@@ -53,6 +94,11 @@ html.darkmode {
     background: linear-gradient(rgb(235, 241, 246) 0%, rgb(171, 211, 238) 50%, rgb(137, 195, 235) 51%, rgb(213, 235, 251) 100%);
     cursor: pointer;
 }
+
+.setup-progress.darkmode > .step:hover {
+    background: #58595b;
+}
+
 
 .setup-progress > .step:first-child:hover {
     border-top-left-radius: 15px;
@@ -67,9 +113,9 @@ html.darkmode {
 .setup-progress > .arrow {
     width: 3% !important;
     max-height: 19px;
-    font-size: 44px;
-    line-height: 0.45;
-    color: #cacaca;
+    font-size: 24px;
+    line-height: 0.75;
+    color: #cacaca;  
 }
 
 
@@ -114,6 +160,16 @@ html.darkmode {
 .dl-status > .top > .abort-dl:hover {
     color: white;
     background-color: rgb(145, 0, 0);
+}
+
+
+red {
+    color: red;
+}
+
+
+.opt-qlty-labels > td {
+    text-align: center;
 }
 
 
@@ -232,6 +288,11 @@ html.darkmode {
     background: linear-gradient(#fff,#f9f9f9);
 }
 
+.setup-page.darkmode {
+    background: #313131;
+    border: 1px solid #494949 !important;
+}
+
 
 .center-dialog {
     max-width: 50%;
@@ -327,13 +388,32 @@ tbody > .label.darkmode:nth-child(2n) {
     border-radius: 5px;
 }
 
+
+.account-status > div > .top {
+    font-weight: bold;
+}
+
+.account-status > div > .mid {
+    padding-top: 5px;
+    border-top: 1px solid gainsboro;
+}
+
+
+.account-status > aside {
+    margin: auto;
+}
+
 .account-status.darkmode {
     background: #313131;
     border: 1px solid #494949;
     box-shadow: unset;
 }
-.account-status.darkmode > div > .top {
+.account-status.darkmode > div > .top, .account-status.darkmode > .options > ul > li > a {
     color: white;
+}
+
+.account-status.darkmode > aside > img {
+    filter: invert();
 }
 
 
@@ -389,9 +469,58 @@ tbody > .label.darkmode:nth-child(2n) {
     color: #8cbd1a !important;
 }
 .account-status > div > .bottom.not-premium {
-    color: #bd1a1a !important;
+    color: #7c7c7c !important;
 }
 
+
+.dialog-container > .dialog > h4 {
+    margin-bottom: 5px;
+}
+
+.code, code {
+    border: 1px solid gainsboro;
+    padding: 2px;
+}
+
+
+
+.dialog-container {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000c4;
+}
+
+
+.dialog-container > .dialog {
+    width: fit-content;
+    margin: 15% auto;
+    background: white;
+    box-shadow: 5px 5px #555;
+    padding: 15px;
+}
+
+.dialog-container > .dialog.darkmode {
+    background-color: #1d2124;
+}
+
+
+
+.account-status > .line {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 1px;
+    background-color: gainsboro;
+
+}
+
+.account-status > .options {
+    height: fit-content;
+    margin: auto;
+}
 
 
 .theme-btn::before {
@@ -427,6 +556,40 @@ tbody > .label.darkmode:nth-child(2n) {
 
 .size8 {
     font-size: 8px;
+}
+
+
+.topbar-search-box {
+    display: inline-block;
+    background: white;
+    border: 1px solid #888;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.topbar-search-box.darkmode {
+    background: #484848;
+    border: 1px solid #5c5c5c;
+}
+
+.topbar-search-box.darkmode > input, .topbar-search-box.darkmode > select {
+    color: white;
+}
+
+.topbar-search-box > input, .topbar-search-box > select {
+    background: unset;
+    border: unset;
+}
+
+.topbar-search-box > select {
+    border-left: 1px solid #c6c6c6;
+}
+
+
+
+.btn5 {
+    font-weight: bold;
+    background: #393939;border: unset;color: white;padding: 10px;
 }
 
 
@@ -603,6 +766,11 @@ a {
 }
 
 
+.size14 {
+    font-size: 14px;
+}
+
+
 .hires {
     float: left;
     margin-right: 5px;
@@ -635,6 +803,17 @@ a {
 }
 
 
+.status-success {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 5px;
+    background-color: #79bd17;
+    font-weight: bold;
+    color: white;
+}
+
+
 .arrow-rt-submit.darkmode {
     filter: invert();
 }
@@ -643,9 +822,14 @@ a {
     background: linear-gradient(#3a3a3a,#2d2d2d);
     border: 1px solid #626060;
 }
-.artist-name.darkmode, .artist-name.darkmode > a, .album-title.darkmode > a,.release.darkmode a, .release.darkmode > ul > li, .theme-sel.darkmode > a,
+.artist-name.darkmode, .setup-progress.darkmode > .step > a, .setup-screens.darkmode > .screen > .container > .top > main > *, .artist-name.darkmode > a, .album-title.darkmode > a,.release.darkmode a, .release.darkmode > ul > li, .theme-sel.darkmode > a,
 .results-header.darkmode > div > span, .genre-title, tbody > .label.darkmode > td > a, .label-details.darkmode {
     color: white;
+}
+
+
+.container > .top > main > h3 {
+    margin-top: unset;
 }
 
 
