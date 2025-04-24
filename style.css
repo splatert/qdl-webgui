@@ -282,6 +282,17 @@ red {
     height: fit-content;
 }
 
+.title-format-editor > form > div > .preview {
+    background: #f9f9f9;
+    border: 1px solid gray;
+    border-left: unset;
+}
+
+
+.title-format-editor > form > div > * {
+    padding: 5px;
+}
+
 
 
 .setup-page {

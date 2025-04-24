@@ -180,7 +180,7 @@
                         }
 
                         if (isset($logfile) && $logfile != '') {
-                            // removeStatusLogFile($logfile);
+                            removeStatusLogFile($logfile);
                         }
                         
                         if (isset($lastline) && $lastline != '') {
@@ -201,7 +201,7 @@
                                 echo 'Is your email address and password correct?';
                             }
                             else if ($error_type == 'not_premium') {
-                                echo 'Your account does not have a streaming plan.';
+                                echo 'Your account does not have a streaming plan or an existing plan may have expired.';
                             }
                         }
                     ?>

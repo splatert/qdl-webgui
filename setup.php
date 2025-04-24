@@ -23,7 +23,8 @@
         2 => 'Audio Quality',
         3 => 'Link Account',
         4 => 'SimpleHTMLDOM',
-        5 => 'Final Step'
+        5 => 'Title Formats',
+        6 => 'Thank You'
     );
 
     if (isset($_GET['step'])) {
@@ -67,6 +68,28 @@
                     editCookie('opt-audio-qlty', 6);
 
                     header('Location: setup.php?step='.$step);
+
+                }
+            case 5:
+                if (isset($_GET['format-query']) && isset($_GET['opt-apply'])) {
+                    
+                    if (isset($_GET['preview'])) {
+                        unset($_GET['preview']);
+                    }
+
+                    $qry = $_GET['format-query'];
+                    if (isset($_GET['opt-title-format-category'])) {
+                        $cat = $_GET['opt-title-format-category'];
+                        if ($cat == 'track') {
+                            $cfgFile->setProperty('track_format', $qry);
+                        }
+                        else {
+                            $cfgFile->setProperty('folder_format', $qry);
+                        }
+
+                        $_GET['save-success'] = '';
+                        unset($_GET['opt-apply']);
+                    }
 
                 }
         }
@@ -402,6 +425,106 @@
 
 
                 <div class="screen" id="screen5"> <div class="container">
+                    <div class="top" style="display:flex;">
+                            <main>
+
+                                <?php
+                                if (isset($_GET['save-success'])) {
+                                    echo '<span class="status-success">Saved.</span>';
+                                }
+                                ?>
+
+                                <h3>Title Formats</h3>
+                                <p>On this page, you can change the title format for tracks and album folder to your liking.
+                                    Please select the type of title you would like to edit then make your changes below.
+                                </p>
+
+                                <form>
+                                    <input type="hidden" name="step" value="5">
+                                    <button type="submit" name="opt-title-format-category" value="track">Track titles</button>
+                                    <button type="submit" name="opt-title-format-category" value="album">Album folder</button>
+                                </form>
+
+                                <div>
+                                    <div class="title-format-editor" style="margin-top: 15px;">
+                                        <?php
+                                            if (isset($_GET['opt-title-format-category'])) {
+                                                $tfc = $_GET['opt-title-format-category'];
+                                                if ($tfc == 'track' || $tfc == 'album') {
+
+                                                    echo '
+                                                        <form>
+                                                            <input type="hidden" name="step" value="5">';
+                                                            
+                                                            if ($tfc == 'track') {
+                                                                echo '<span>Track title format</span>
+                                                                <input type="hidden" name="opt-title-format-category" value="track">';
+                                                            }
+                                                            else {
+                                                                echo '<span>Album folder title format</span>
+                                                                <input type="hidden" name="opt-title-format-category" value="album">';
+                                                            }
+
+
+                                                            echo '<div style="display:flex;">';
+                                                                
+                                                                $qry = '';
+                                                                if (isset($_GET['format-query'])) {
+                                                                    $qry = $_GET['format-query'];
+                                                                }
+                                                                else {
+                                                                    if ($tfc == 'track') {
+                                                                        $qry = $cfgFile->getProperty('track_format');
+                                                                    }
+                                                                    else {
+                                                                        $qry = $cfgFile->getProperty('folder_format');
+                                                                    }
+                                                                }
+
+                                                                echo '<input style="width: 100%;" type="text" name="format-query" value="'.$qry.'">';
+                                                                
+                                                                echo '<div style="width: 100%;" class="preview">';
+                                                                    
+                                                                    $metadata_tags = array(
+                                                                        '{artist}' => 'Ferry C.',
+                                                                        '{album}' => 'Junk EP',
+                                                                        '{year}' => '2006',
+                                                                        '{sampling_rate}' => '44.1',
+                                                                        '{bit_depth}B' => 'FLAC',
+                                                                        '{tracktitle}' => 'Junk (Original Mix)',
+                                                                        '{tracknumber}' => '01',
+                                                                    );
+
+                                                                    if ($qry) {
+                                                                        $res = str_replace(array_keys($metadata_tags), $metadata_tags, $qry);
+                                                                        echo $res;
+
+                                                                    }
+
+                                                                echo '</div>
+                                                            </div>
+
+                                                            <div style="margin-top: 5px;">
+                                                                <button type="submit" name="preview" value="">Preview</button>
+                                                                <button type="submit" name="opt-apply" value="track-title-format">Save</button>
+                                                            </div>
+
+                                                        </form>
+                                                        ';
+
+                                                }
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+
+                            </main>
+                    </div>
+                </div></div>
+
+
+
+                <div class="screen" id="screen6"> <div class="container">
                     <div class="top" style="display:flex;">
                             <main>
                                 <h3>Setup Complete</h3>
