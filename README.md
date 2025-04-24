@@ -2,7 +2,7 @@
 <img src="https://github.com/user-attachments/assets/a3cc61b1-6753-4e68-b2cc-64c8c97e5ecd">
 
 # qdl-webgui
-QDL-WebGUI is an experimental browser-based client for qobuz-dl. It is written in PHP and currently supports linux-based systems only.
+QDL-WebGUI is an experimental browser-based client for <a href="https://github.com/vitiko98/qobuz-dl">qobuz-dl</a>. It is written in PHP and currently supports linux-based systems only.
 
 ## Features
 - Simple, compact UI. Written in PHP and uses minimal amount of Javascript.
