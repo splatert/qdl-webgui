@@ -490,7 +490,7 @@
                                                                         '{album}' => 'Junk EP',
                                                                         '{year}' => '2006',
                                                                         '{sampling_rate}' => '44.1',
-                                                                        '{bit_depth}B' => 'FLAC',
+                                                                        '{bit_depth}' => '16',
                                                                         '{tracktitle}' => 'Junk (Original Mix)',
                                                                         '{tracknumber}' => '01',
                                                                     );
