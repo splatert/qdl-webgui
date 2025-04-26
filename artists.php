@@ -24,7 +24,7 @@
 
     </head>
 
-    <body class="">
+    <body class="<?php echo $sitetheme ?>">
         <link rel="stylesheet" href="style.css">
 
         <div class="page <?php echo $sitetheme ?>">

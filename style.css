@@ -3,7 +3,19 @@
 
 html {
     font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(#f7f7f7, white);
 }
+
+
+html.darkmode {
+    background: linear-gradient(#1c1c1c, rgb(21, 21, 21));
+}
+
+
+.page {
+    background: white;
+}
+
 
 
 html.darkmode {
@@ -705,7 +717,7 @@ a {
 
 .view-on-qbz.darkmode {
     background: unset;
-    border: 1px solid white;
+    border: none;
     border-radius: 5px;  
 }
 
@@ -729,6 +741,20 @@ a {
 }
 
 
+.view-on-qbz > a {
+    text-decoration: none;
+}
+
+
+.view-on-qbz {
+    background: unset;
+    color: #181818;
+    margin-top: 15px;
+    border: unset;
+
+}
+
+
 
 .toolbar.darkmode {
     background: linear-gradient(#464646,#313131) !important;
@@ -739,13 +765,23 @@ a {
 }
 
 .tracklist > tbody > tr > td {
-    border: 1px solid gainsboro;
-    padding: 5px;
+    border-bottom: 1px solid gainsboro;
     font-size: 14px;
 }
 
+
 .tracklist.darkmode > tbody > tr > td {
-    border: 1px solid #7b7b7b;
+    border-bottom: 1px solid #666565;
+}
+
+
+.tracklist > tbody > tr > .td-track {
+    border-right: 1px solid gainsboro;
+}
+
+
+.tracklist.darkmode > tbody > tr > .td-track {
+    border-right: 1px solid #7b7b7b;
 }
 
 

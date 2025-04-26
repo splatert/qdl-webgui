@@ -89,8 +89,8 @@
                 </aside>
 
                 <div style="padding-left: 15px; display: grid;">
-                    <span class="top size12">abc***def@ghi.jk</span>
-                    <span class="mid size12">Membership status</span>
+                    <span class="top size12">Connecting...</span>
+                    <span class="mid size12">Account status</span>
                     <ul class="bottom">
                         <li class="top">PLEASE WAIT</li>
                     </ul>

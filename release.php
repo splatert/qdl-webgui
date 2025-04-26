@@ -9,6 +9,7 @@
 
     include('lib/simplehtmldom/simple_html_dom.php');
     require_once('topbar.php');
+    include('misc/theme_ctrl.php');
     include('global.php');
 ?>
 
@@ -19,7 +20,7 @@
     </head>
 
 
-    <body>
+    <body class="<?php echo $sitetheme ?>">
         <script src="actions.js"></script>
         <script>loadingDialog();</script>
 
@@ -69,7 +70,7 @@
                             echo '</table>';
                         }
 
-                        echo '<ul style="width: fit-content;">';
+                        echo '<ul style="width: 100%;">';
                             $artist = $rel->find('.album-meta span');
                             $title = $rel->find('.album-meta h1');
 
@@ -152,7 +153,7 @@
                                     }
                                     echo '</div></button>';
 
-                                    echo '<button class="view-on-qbz '.$sitetheme.'" style="padding:14px"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on Qobuz</a></button>';
+                                    echo '<button class="view-on-qbz '.$sitetheme.'"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on <b>Qobuz</b></a></button>';
 
                                 }
                             echo '</form>';
@@ -174,7 +175,7 @@
                             $trackItems = $dom->find('.track');
                             $tracknum = 0;
 
-                            echo '<tr><th>#</th><th>Track</th><th>Duration</th><th>Credits</th><th>Preview</th></tr>';
+                            echo '<tr><th>#</th><th>Track</th><th>Duration</th><th>Credits</th><th>Listen</th></tr>';
 
                             foreach ($trackItems as $trackItem) {
                                 
@@ -187,21 +188,21 @@
                                     $tracknum += 1;
 
                                     echo '<tr>
-                                        <td>'.$tracknum.'</td>
+                                        <td style="text-align: center;">'.$tracknum.'</td>
                                     
-                                        <td>'.$title[0]->plaintext.'</td>
-                                        <td style="width:10%">'.$dur[0]->plaintext.'</td>
+                                        <td class="td-track">'.$title[0]->plaintext.'</td>
+                                        <td style="width:10%; text-align: center;">'.$dur[0]->plaintext.'</td>
                                     ';
 
                                     if (isset($title[0]) && isset($infos[0])) {
-                                        echo '<td style="text-align:center;width:10%;"><a class="noline info-ico '.$sitetheme.'" target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'"><b>ⓘ</b></a></td>';
+                                        echo '<td style="text-align:center;width:10%;"><a class="noline info-ico '.$sitetheme.'" target="_blank" href="credits.php?t='.urlencode($title[0]->innertext).'&c='.urlencode($infos[0]->innertext).'"><b>ⓘ View</b></a></td>';
                                     }
                                     else {
                                         echo '<td><center>N/A</center></td>';
                                     }
 
                                     $prev_audio = $trackItem->getAttribute('data-source');
-                                    echo '<td style="width:10%">';
+                                    echo '<td style="width: 7%;">';
                                         if (isset($prev_audio)) {
                                             echo '<div style="text-align: center;">';
                                                 echo '<img class="preview" onclick="preview(this, this.parentNode.lastChild)" src="img/misc/preview.png">';

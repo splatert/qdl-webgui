@@ -108,7 +108,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>
+    <body class="<?php echo $sitetheme ?>">
 
         <script>
             function page(page) {
