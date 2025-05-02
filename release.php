@@ -11,6 +11,7 @@
     require_once('topbar.php');
     include('misc/theme_ctrl.php');
     include('global.php');
+
 ?>
 
 
@@ -22,7 +23,6 @@
 
     <body class="<?php echo $sitetheme ?>">
         <script src="actions.js"></script>
-        <script>loadingDialog();</script>
 
         <div class="page <?php echo $sitetheme ?>">
 
@@ -52,6 +52,17 @@
                         echo '<script>removeLoadingDialog();</script>';
                         die('<b class="error">Error 404</b> - Qobuz resource no longer exists.');
                     }
+
+
+                    if (isset($_GET['dl-aborted'])) {
+                        echo '<span class="status-info">Download canceled.</span>';
+                    }
+                    elseif (!isset($_GET['dl-aborted']) && isset($_GET['dl-complete'])) {
+                        echo '<div class="status-success">
+                            <span>Download complete. Please check your downloads folder.</span>';
+                        echo '</div>';
+                    }
+
 
 
                     $rel = $dom->find('.album-item')[0];
@@ -143,17 +154,18 @@
                                     }
 
                                     echo '<input type="hidden" name="url" value="https://www.qobuz.com'.$_GET['url'].'" ></input>';
+                                    
+
                                     echo '<button class="btn1" type="submit" style="padding: 10px;" onclick="dlstatus(); loadingDialog(\'Downloading tracks... Please wait.\');">
-                                    <div style="display: grid;text-align: left;">
-                                        <span>Download Album</span>';
+                                        <div style="display: grid;text-align: left;">
+                                            <span>Download Album</span>';
 
-                                    $numTrax = $dom->find('.album-about__items .album-about__item');
-                                    if (isset($numTrax[0])) {
-                                        echo '<span class="size8">'.$numTrax[0]->plaintext.'</span>';
-                                    }
-                                    echo '</div></button>';
-
-                                    echo '<button class="view-on-qbz '.$sitetheme.'"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on <b>Qobuz</b></a></button>';
+                                        $numTrax = $dom->find('.album-about__items .album-about__item');
+                                        if (isset($numTrax[0])) {
+                                            echo '<span class="size8">'.$numTrax[0]->plaintext.'</span>';
+                                        }
+                                        echo '</div></button>';
+                                        echo '<button class="view-on-qbz '.$sitetheme.'"><a target="_blank" href="https://www.qobuz.com'.$_GET['url'].'">View on <b>Qobuz</b></a></button>';
 
                                 }
                             echo '</form>';
@@ -219,10 +231,31 @@
                 }
 
 
+                if (isset($_GET['is-dloaded'])) {
+                    echo '<div class="dialog-container">
+                        <div class="dialog">
+                            <span><b>Already downloaded</b></span><br>
+                            <span>This release was already downloaded according to the download database.</span>
+                            <br>';
+                            
+                            echo '<form method="GET" action="download.php">';
+                                echo '<input type="hidden" name="nodb" value="1">';
+                                echo '<br>
+                                <button class="btn2" type="submit" onclick="loadingDialog(\'Downloading tracks... Please wait.\'); dlstatus();">Download anyway</button>';
+
+                                if (isset($_GET['url'])) {
+                                    echo '<input type="hidden" name="url" value="'.$_GET['url'].'">';
+                                    echo '<a style="margin-left:15px;position: relative;top: 2px;" href="release.php?url='.$_GET['url'].'">Cancel</a>';
+                                }
+
+                            echo '</form>
+                        </div>';
+
+                    echo '</div>';
+                }
 
             ?>
 
-            <script>removeLoadingDialog();</script>
         </div>
 
     </body>

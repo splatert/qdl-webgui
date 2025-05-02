@@ -9,6 +9,8 @@
     include_once('cfgfile.php');
     $cfgFile = new ConfigFile;
 
+
+
     if (!file_exists($cfgFile->getPath())) {
         echo '<div class="dialog-container">
             <div class="dialog '.$sitetheme.'">
@@ -23,6 +25,19 @@
             </div>
         </div>
         ';
+    }
+
+
+    if (isset($_GET['no-premium'])) {
+        echo '<div class="dialog-container">
+            <div class="dialog '.$sitetheme.'">
+                <span><b>Free accounts are not eligible to download tracks.</b></span>
+                <br><span>Your account does not have a streaming plan or an existing plan may have expired.</span>
+                <br><br>
+                <a href="setup.php?step=3">Change account</a>
+
+            </div>
+        </div>';
     }
 
 

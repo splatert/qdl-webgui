@@ -144,6 +144,7 @@ html.darkmode {
 
 .rel-actions {
     width: 70%;
+    margin: auto;
 }
 
 
@@ -605,6 +606,9 @@ tbody > .label.darkmode:nth-child(2n) {
 
 .topbar-search-box > select {
     border-left: 1px solid #c6c6c6;
+    font-weight: bold;
+    font-size: 12px;
+    color: #181818;
 }
 
 
@@ -849,6 +853,18 @@ a {
 }
 
 
+.status-info {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 5px;
+    background-color: #a7a7a7;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+
 .status-success {
     display: block;
     margin-top: 5px;
@@ -901,13 +917,13 @@ ul {
 
 
 
-.prog-bar, .prog-bar > .bar {
-    border-radius: 5px;
+.prog-bar {
+    border-radius: 3px;
 }
 
 
 .prog-bar {
-    height: 7px;
+    height: 10px;
     border: 1px solid;
     width: 100%;
     margin: auto;

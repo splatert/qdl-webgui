@@ -213,8 +213,14 @@
 
 
                                 <form method="GET" action="download.php">
+                                    <input type="hidden" name="return" value="setup.php?step=1">
                                     <input type="hidden" name="mode" value="purge">
                                     <button class="btn4" type="submit" style="float:right;">Purge Database</button>
+                                    <?php
+                                        if (isset($_GET['db-purged'])) {
+                                            echo '<span class="status-success">Database has been purged.</span>';
+                                        }
+                                    ?>
                                 </form>
 
                             </main>
