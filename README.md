@@ -26,6 +26,7 @@ QDL-WebGUI is an experimental browser-based client for <a href="https://github.c
 2. Artist pages - Done (Basic functionality)
 3. Settings page to edit config.ini - Done. Soon to also add advanced options/flags.
 4. Convert links for featured album/discography banners to work with this frontend - Partially Done
+5. Good and consistent site design - workin' on it
 
 ## Screenshots
 ### Home screen
