@@ -349,6 +349,12 @@ tbody > .label > td > span > a {
 }
 
 
+.no-us {
+    text-decoration: none;
+}
+
+
+
 .arrow-rt-submit {
     background-image: url('img/ico/arrow-rt.png');
     background-size: contain;
@@ -360,9 +366,46 @@ tbody > .label > td > span > a {
     background-color: unset;
 }
 
+
+.sa-name.darkmode {
+    color: white;
+}
+
+
+#profile-similar-artists {
+    border: 1px solid gainsboro;
+}
+
+#profile-similar-artists.darkmode, .artist-desc.darkmode {
+    border: 1px solid #626060;
+}
+
+
+#profile-similar-artists > span {
+    width: 100%;
+    display: block;
+    background: #353535;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+#profile-similar-artists > div {
+    display: flex;
+    text-align: center;
+    overflow-x: scroll;
+}
+.similar-artist-pic {
+    max-height: 75px;
+    margin: auto;
+}
+
+
+
 .label-details {
     display: flex;
     margin-top: 5px;
+    width: 100%;
 }
 .label-details > main {
     height: fit-content;
@@ -459,7 +502,7 @@ tbody > .label.darkmode:nth-child(2n) {
 .artist-desc {
     max-height: 135px;
     overflow-y: scroll;
-    border: 1px solid gray;
+    border: 1px solid gainsboro;
     padding: 5px;
     font-size: 14px;
 }

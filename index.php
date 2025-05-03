@@ -139,14 +139,14 @@
                 <button type="submit" class="btn1" onclick="loadingDialog('')">Search</button>
                 <input type="submit" class="btn2" name="type" value="lucky">
                     <br>
-                <input type="radio" checked="checked" name="type" value="search">
-                <label for="type">Albums</label>
+                <input type="radio" checked="checked" name="cat" value="search">
+                <label for="cat">Albums</label>
 
-                <input type="radio" name="type" value="artists">
-                <label for="type">Artists</label>
+                <input type="radio" name="cat" value="artists">
+                <label for="cat">Artists</label>
 
-                <input type="radio" name="type" value="labels">
-                <label for="type">Labels</label>
+                <input type="radio" name="cat" value="labels">
+                <label for="cat">Labels</label>
 
             </form>
         </div>

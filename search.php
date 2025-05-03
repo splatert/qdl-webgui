@@ -11,11 +11,11 @@
     include('global.php');
 
 
-    if (isset($_GET['q']) && isset($_GET['type'])) {
-        if ($_GET['type'] == 'labels') {
+    if (isset($_GET['q']) && isset($_GET['cat'])) {
+        if ($_GET['cat'] == 'labels') {
             header('Location: labels.php?q='.$_GET['q']);
         }
-        elseif ($_GET['type'] == 'artists') {
+        elseif ($_GET['cat'] == 'artists') {
             header('Location: artists.php?q='.$_GET['q']);
         }
     }
@@ -57,8 +57,8 @@
 
             <?php
 
-            if (isset($_GET['type'])) {
-                if ($_GET['type'] == 'lucky') {
+            if (isset($_GET['cat'])) {
+                if ($_GET['cat'] == 'lucky') {
                     if (isset($_GET['q']) && $_GET['q'] != '') {
                         echo "Feelin' lucky";
                         echo '<script>loadingDialog("Downloading mystery album...")</script>';
@@ -233,7 +233,7 @@
 
 
             // query search mode
-            elseif (!isset($_GET['genre']) && isset($_GET['q']) && isset($_GET['type']) && $_GET['type'] == 'search') {
+            elseif (!isset($_GET['genre']) && isset($_GET['q']) && isset($_GET['cat']) && $_GET['cat'] == 'search') {
                 
 
                 echo '<title>'.trim($_GET['q']).' | Qobuz-DL</title>';

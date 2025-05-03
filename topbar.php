@@ -20,7 +20,7 @@
             
                 <div class="topbar-search-box <?php echo $sitetheme ?>" style="display: inline-block;">
                     <input type="text" name="q">
-                    <select name="type">
+                    <select name="cat">
                         <option value="search">Albums</option>
                         <option value="artists">Artists</option>
                         <option value="labels">Labels</option>

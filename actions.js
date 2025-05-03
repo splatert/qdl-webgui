@@ -44,6 +44,10 @@ async function getDLStatus(relTitle, cover) {
     var coverSet = false;
 
 
+    var reached = false;
+    var failCt = 0;
+
+
     setInterval(() => {
 
         fetch('status.php?rel=' + relTitle)
@@ -84,6 +88,12 @@ async function getDLStatus(relTitle, cover) {
                 
                 document.querySelector('.dl-status .bottom .prog').innerText = dlprog;
                 document.querySelector('.dl-status .bottom .prog-bar .bar').style.width = percent + '%';
+
+                reached = true;
+                failCt = 0;
+            }
+            else {
+                reached = false;
             }
 
             if (statusData[3] && statusData[3] != '') {
@@ -92,6 +102,23 @@ async function getDLStatus(relTitle, cover) {
             }
 
         })
+
+        if (!reached) {
+            if (failCt < 7) {
+                failCt += 1;
+                console.log(failCt);
+            }
+            else {
+                document.querySelector('#vpn-issue').style.display = 'block';
+                document.querySelector('.dl-status .bottom .prog-bar').style.display = 'none';
+            }
+
+        }
+        else {
+            document.querySelector('#vpn-issue').style.display = 'none';
+            document.querySelector('.dl-status .bottom .prog-bar').style.display = 'block';
+        }
+        
 
     }, 1000);
 
@@ -141,6 +168,7 @@ function loadingDialog(text) {
                     <div class="prog-bar">
                         <div class="bar"></div>
                     </div>
+                    <span id="vpn-issue" class="size12" style="display:none;">If download issues persist, please pause VPN connection.</span>
                 </div>
 
             </div>

@@ -113,20 +113,55 @@
                     echo '</div>';
 
                     if (isset($_GET['view-as']) && $_GET['view-as'] == 'artist') {
-                        
                         $desc = '';
                         $profile_info = $dom->find('#catalog-heading__text');
                         if (isset($profile_info[0])) {
                             $desc = trim(htmlentities($profile_info[0]->plaintext));
                             if ($desc != 'Read more') {
-                                echo '<p class="artist-desc">'.$desc.'</p>';
+                                echo '<p class="artist-desc '.$sitetheme.'">'.$desc.'</p>';
                             }
                         }
                     }
 
 
-                    echo '<hr size="1" color="#c6c6c6">';
+                    if (isset($_GET['view-as']) && $_GET['view-as'] == 'artist') {
+                        $similar_artists = $dom->find('.catalog-heading__item');
+                        if (count($similar_artists) > 0) {
+                            echo '<div id="profile-similar-artists" class="'.$sitetheme.'">
+                            <span class="size12">Similar artists</span>';
+                                echo '<div>';
+                                    foreach ($similar_artists as $sa) {
 
+                                        echo '<div style="display:grid; margin-left:15px;">';
+                                            echo "<a class='no-us' href='http://qdl.localhost/catalog.php?view-as=artist&url={$sa->href}'>";
+                                                $n = $sa->find('.catalog-heading__name');
+                                                $pic = $sa->find('.catalog-heading__image');
+
+                                                if (isset($pic[0])) {
+                                                    $style = $pic[0]->getAttribute('style');
+                                                    preg_match('/\(([^)]+)\)/', $style, $match_url);
+                                                    if (isset($match_url[1]) && $match_url[1] != "'/assets-static/img/common/default_artist.svg'") {
+                                                        echo '<img class="artist-pic similar-artist-pic" src='.$match_url[1].'>';
+                                                    }
+                                                    else {
+                                                        echo '<img class="artist-pic similar-artist-pic" src="img/misc/artist128.png">';
+                                                    }
+                                                }
+
+                                                if (isset($n[0])) {
+                                                    echo "<span class='sa-name {$sitetheme} size12'>{$n[0]->plaintext}</span>";
+                                                }
+                                            echo '</a>';
+                                        echo '</div>';
+                                    }
+                                echo '</div>';
+                            echo '</div>';
+                        }
+                    }
+
+
+
+                    echo '<hr size="1" color="#c6c6c6">';
 
                     $items = $dom->find('.product__item');
                     foreach ($items as $item) {
