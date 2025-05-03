@@ -11,6 +11,7 @@ QDL-WebGUI is an experimental browser-based client for <a href="https://github.c
 
 
 ## Requirements
+- PHP 8.2
 - An installation of qobuz-dl that's done with **pipx**.
   (**04/23/25**: I've added support for non-pipx users, however, I'll need somebody to test it out.)
 
