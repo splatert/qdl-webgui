@@ -38,7 +38,7 @@ QDL-WebGUI is an experimental browser-based client for <a href="https://github.c
 ### Album page
 <img src="https://github.com/user-attachments/assets/9e93c877-7ef3-41ce-b65a-c22a54b1cc01">
 
-### Download progress
+### Download progress (with Javascript enabled)
 <img src="https://github.com/user-attachments/assets/81b40edb-849b-4fa2-9278-4ca141311766">
 
 ### Setup wizard - Step Two
