@@ -235,7 +235,7 @@
         $dl_status['error_code'] = 'not_premium';
         $dl_status['is_success'] = false;
 
-        header("Location: ?no-premium");
+        header("Location: /?no-premium");
     }
 
     if (isset($logfile) && $logfile != '') {
